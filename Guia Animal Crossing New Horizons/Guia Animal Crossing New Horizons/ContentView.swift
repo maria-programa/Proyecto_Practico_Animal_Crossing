@@ -8,17 +8,40 @@
 import SwiftUI
 
 struct ContentView: View {
+    let villagers = ["Munchi", "Teddy", "Melba", "Celeste", "Ariel", "Tere", "Lope", "Paulino"]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ScrollView {
+            LazyVGrid (
+                columns: [
+                    GridItem(.fixed(150)),
+                    GridItem(.fixed(150))
+                ]
+            ) {
+                ForEach(villagers, id: \.self) { villager in
+                    VStack {
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 50)
+                        Text(villager)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    .padding()
+                    .background{
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(Color.mint)
+                    }
+                }
+            }
+            
         }
-        .padding()
+        .navigationTitle("Vecinos")
+        
     }
 }
 
 #Preview {
     ContentView()
 }
+
