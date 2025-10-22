@@ -1,5 +1,5 @@
 //
-//  NeighboursView.swift
+//  VillagersView.swift
 //  Guia Animal Crossing New Horizons
 //
 //  Created by Maria Lozano Ovejero on 17/10/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NeighboursView: View {
+struct VillagersView: View {
     let villagers = ["Munchi", "Teddy", "Melba", "Celeste", "Ariel", "Tere", "Lope", "Paulino"]
     
     let column: GridItem = GridItem(.fixed(150))
@@ -36,17 +36,11 @@ struct NeighboursView: View {
                         textView
                     }
                     .padding()
-                    .background{
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .fill(cardBackgrounColor)
-                    }
-                    .shadow(
-                        color: shadowColor,
-                        radius: shadowRadius,
-                        x: shadowXOffset,
-                        y: shadowYOffset
+                    .background(
+                        RoundedRectangle(
+                            cornerRadius: cornerRadius
+                        ).foregroundColor(cardBackgrounColor)
                     )
-                    
                 }
             }
             
@@ -78,7 +72,7 @@ struct NeighboursView: View {
 
 #Preview {
     NavigationStack {
-        NeighboursView()
+        VillagersView()
     }
 }
 
