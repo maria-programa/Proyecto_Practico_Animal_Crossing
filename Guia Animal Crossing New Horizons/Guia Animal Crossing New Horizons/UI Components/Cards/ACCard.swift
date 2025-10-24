@@ -16,6 +16,7 @@ protocol ACCardModel {
 
 struct ACCard: View {
     let model: ACCardModel
+    @State private var isLiked: Bool = false
     //MARK: Card Constants
     let spacing: CGFloat = 8
     let cornerRadius: CGFloat = 24
@@ -35,7 +36,10 @@ struct ACCard: View {
             spacing: spacing
         ) {
             imageView
-            textView
+            HStack {
+                textView
+                likeButton
+            }
         }
         .padding()
         .background{
@@ -62,4 +66,24 @@ struct ACCard: View {
             .foregroundStyle(model.foregroundColor)
             .frame(maxWidth: .infinity, alignment: .center)
     }
+    
+    var likeButton: some View {
+        Button {
+            withAnimation {
+                isLiked.toggle()
+            }
+        } label: {
+            Image(systemName: isLiked ? "heart.fill" : "heart")
+                .resizable()
+                .scaledToFit()
+                .frame(height: isLiked ? 25 : 20)
+                .foregroundStyle(isLiked ? .red : .white)
+        }
+        
+    }
+}
+
+
+#Preview {
+    ACCard(model: FishModel.mock1)
 }

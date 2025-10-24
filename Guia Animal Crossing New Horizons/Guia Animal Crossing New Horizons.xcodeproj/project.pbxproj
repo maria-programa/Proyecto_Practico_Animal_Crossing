@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		A04128C72EA21D7A00C0C5EF /* Guia Animal Crossing New Horizons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Guia Animal Crossing New Horizons.app"; path = "/Users/mlozaove/Documents/Ejemplos/Proyecto_Animal_Crossing/Guia Animal Crossing New Horizons/build/Debug-iphoneos/Guia Animal Crossing New Horizons.app"; sourceTree = "<absolute>"; };
+		A0294E4D2EA8B04D0027BBF3 /* Guia Animal Crossing New Horizons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Guia Animal Crossing New Horizons.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,6 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				A019BBA12EA77BF200964397 /* Guia Animal Crossing New Horizons */,
+				A0294E4D2EA8B04D0027BBF3 /* Guia Animal Crossing New Horizons.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,7 +59,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Guia Animal Crossing New Horizons";
-			productReference = A04128C72EA21D7A00C0C5EF /* Guia Animal Crossing New Horizons.app */;
+			productReference = A0294E4D2EA8B04D0027BBF3 /* Guia Animal Crossing New Horizons.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
