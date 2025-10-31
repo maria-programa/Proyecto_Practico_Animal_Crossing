@@ -34,7 +34,8 @@ struct TabBarView: View {
             NavigationStack {
                 BugsView()
                     .navigationDestination(for: BugModel.self) { bug in
-                        Text("Detail for: \(bug.name)")
+                        BugsDetailsView(bug: bug)
+                            .navigationTitle(Text(bug.name))
                     }
             }
             .tabItem {

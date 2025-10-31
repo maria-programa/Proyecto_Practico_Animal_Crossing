@@ -8,12 +8,23 @@
 import Foundation
 import SwiftUI
 
-struct BugModel:Identifiable, ACCardModel {
+struct BugModel:Identifiable, ACCardModel, ACDetailsModel {
+    
+    
     let id = UUID()
     let specie: String
     let bugIcon: Image = Image(systemName: "ladybug.fill")
     let foregroundColor: Color = Color("primaryText")
     let backgroundColor: Color = .green
+    
+    let catchPhrase: String
+    let location: String
+    let time: String
+    let weather: String
+    let abailabilityNorth: String
+    let abailabilitySouth: String
+    let sellingPriceNook: Int
+    let sellingPriceFlick: Int
     
     var image: Image {
         return bugIcon
@@ -23,8 +34,34 @@ struct BugModel:Identifiable, ACCardModel {
         return specie
     }
     
-    init(specie: String) {
+    var importantInfo: String {
+        return weather
+    }
+    
+    var sellingPriceOther: Int {
+        return sellingPriceFlick
+    }
+    
+    init(
+        specie: String,
+        catchPhrase: String,
+        location: String,
+        time: String,
+        weather: String,
+        abailabilityNorth: String,
+        abailabilitySouth: String,
+        sellingPriceNook: Int,
+        sellingPriceFlick: Int
+    ) {
         self.specie = specie
+        self.catchPhrase = catchPhrase
+        self.location = location
+        self.time = time
+        self.weather = weather
+        self.abailabilityNorth = abailabilityNorth
+        self.abailabilitySouth = abailabilitySouth
+        self.sellingPriceNook = sellingPriceNook
+        self.sellingPriceFlick = sellingPriceFlick
     }
 }
 
@@ -36,9 +73,59 @@ extension BugModel: Hashable {
 }
 
 extension BugModel {
-    static let mock1 = BugModel(specie: "Grasshopper")
-    static let mock2 = BugModel(specie: "Ant")
-    static let mock3 = BugModel(specie: "Ladybug")
-    static let mock4 = BugModel(specie: "Monarch Butterfly")
-    static let mock5 = BugModel(specie: "Mosquito")
+    static let mock1 = BugModel(
+        specie: "Grasshopper",
+        catchPhrase: "I caught a grasshopper! They're a grass act!",
+        location: "On the ground",
+        time: "8 AM – 5 PM",
+        weather: "Any except rain",
+        abailabilityNorth: "Jul – Sep",
+        abailabilitySouth: "Jan – Mar",
+        sellingPriceNook: 160,
+        sellingPriceFlick: 240
+    )
+    static let mock2 = BugModel(
+        specie: "Ant",
+        catchPhrase: "I caught an ant! TELL ME WHERE THE QUEEN IS!",
+        location: "On/near spoiled turnips/candy/lollipops",
+        time: "All day",
+        weather: "Any weather",
+        abailabilityNorth: "All year",
+        abailabilitySouth: "All year",
+        sellingPriceNook: 80,
+        sellingPriceFlick: 120
+    )
+    static let mock3 = BugModel(
+        specie: "Ladybug",
+        catchPhrase: "I caught a ladybug! Sorry to disturb you, ma'am.",
+        location: "On flowers",
+        time: "8 AM – 5 PM",
+        weather: "Any except rain",
+        abailabilityNorth: "Mar – Jun; Oct",
+        abailabilitySouth: "Apr; Sep – Dec",
+        sellingPriceNook: 200,
+        sellingPriceFlick: 300
+    )
+    static let mock4 = BugModel(
+        specie: "Monarch Butterfly",
+        catchPhrase: "I caught a monarch butterfly! Guess the butterflies are a democracy now!",
+        location: "Flying near flowers",
+        time: "4 AM – 5 PM",
+        weather: "Any except rain",
+        abailabilityNorth: "Sep – Nov",
+        abailabilitySouth: "Mar – May",
+        sellingPriceNook: 140,
+        sellingPriceFlick: 210
+    )
+    static let mock5 = BugModel(
+        specie: "Mosquito",
+        catchPhrase: "I caught a mosquito! It's itching for a fight!",
+        location: "Flying",
+        time: "5 PM – 4 AM",
+        weather: "Any except rain",
+        abailabilityNorth: "Jun – Sep",
+        abailabilitySouth: "Dec – Mar",
+        sellingPriceNook: 130,
+        sellingPriceFlick: 195
+    )
 }
