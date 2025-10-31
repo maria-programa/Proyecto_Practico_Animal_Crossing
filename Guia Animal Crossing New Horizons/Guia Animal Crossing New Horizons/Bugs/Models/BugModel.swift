@@ -28,6 +28,13 @@ struct BugModel:Identifiable, ACCardModel {
     }
 }
 
+extension BugModel: Hashable {
+    // Custom Hashable: hash id only
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
 extension BugModel {
     static let mock1 = BugModel(specie: "Grasshopper")
     static let mock2 = BugModel(specie: "Ant")

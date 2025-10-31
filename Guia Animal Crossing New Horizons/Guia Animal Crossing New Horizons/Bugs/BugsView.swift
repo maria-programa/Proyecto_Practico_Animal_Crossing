@@ -9,6 +9,10 @@ import SwiftUI
 
 struct BugsView: ACCollectionTemplate {
     let model: BugsModelView = BugsModelView()
+    
+    func onCardTapped(model: any ACCardModel) {
+        print("\(model.name) was tapped")
+    }
 }
 
 #Preview {

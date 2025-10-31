@@ -16,6 +16,8 @@ protocol ACCardModel {
 
 struct ACCard: View {
     let model: ACCardModel
+    let cardAction: ((ACCardModel) -> Void)
+    
     @State private var isLiked: Bool = false
     //MARK: Card Constants
     let spacing: CGFloat = 8
@@ -27,11 +29,19 @@ struct ACCard: View {
     let shadowYOffset: CGFloat = 4
     let descriptionBackgroundColor: Color = Color("descriptionBackground")
     
-    init(model: ACCardModel) {
+    init(
+        model: ACCardModel,
+        cardAction: @escaping ((ACCardModel) -> Void)
+    ) {
         self.model = model
+        self.cardAction = cardAction
     }
     
     var body: some View {
+        cardLayout
+    }
+    
+    var cardLayout: some View {
         VStack (
             spacing: spacing
         ) {
@@ -85,5 +95,7 @@ struct ACCard: View {
 
 
 #Preview {
-    ACCard(model: FishModel.mock1)
+    ACCard(model: FishModel.mock1) { model in
+        print("\(model.name) was tapped")
+    }
 }

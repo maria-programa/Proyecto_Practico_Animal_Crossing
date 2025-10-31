@@ -9,6 +9,10 @@ import SwiftUI
 
 struct FishesView: ACCollectionTemplate {
     let model: FishesModelView = FishesModelView()
+    
+    func onCardTapped(model: any ACCardModel) {
+        print("\(model.name) was tapped")
+    }
 }
 
 #Preview {

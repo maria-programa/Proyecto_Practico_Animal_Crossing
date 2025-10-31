@@ -9,6 +9,10 @@ import SwiftUI
 
 struct VillagersView: ACCollectionTemplate {
     let model: VillagersModelView = VillagersModelView()
+    
+    func onCardTapped(model: any ACCardModel) {
+        print("\(model.name) was tapped")
+    }
 }
 
 #Preview {

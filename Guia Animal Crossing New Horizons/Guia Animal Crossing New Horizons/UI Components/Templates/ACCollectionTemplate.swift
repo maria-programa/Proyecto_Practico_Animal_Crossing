@@ -9,7 +9,7 @@ import SwiftUI
 
 //A este protocol le pasamos los parametros que van a variar de cada modelo, en este caso el titulo, la descripción y los items de cada colección van a ser distintos
 protocol ACCollectionTemplateModel {
-    associatedtype ItemModel: ACCardModel, Identifiable
+    associatedtype ItemModel: ACCardModel, Identifiable, Hashable
     
     var screenTitle: String { get }
     var description: String { get }
@@ -63,7 +63,11 @@ extension ACCollectionTemplate {
             ]
         ) {
             ForEach(model.collectionItems, id: \.id) { collectionItem in
-                ACCard(model: collectionItem)
+                NavigationLink(value: collectionItem) {
+                    ACCard(model: collectionItem) { _ in
+                        
+                    }
+                }
             }
         }
     }
