@@ -24,7 +24,7 @@ struct BugModel:Identifiable, ACCardModel, ACDetailsModel {
     let abailabilityNorth: String
     let abailabilitySouth: String
     let sellingPriceNook: Int
-    let sellingPriceFlick: Int
+    let sellingPriceKamilo: Int
     
     var image: Image {
         return bugIcon
@@ -39,7 +39,7 @@ struct BugModel:Identifiable, ACCardModel, ACDetailsModel {
     }
     
     var sellingPriceOther: Int {
-        return sellingPriceFlick
+        return sellingPriceKamilo
     }
     
     init(
@@ -51,7 +51,7 @@ struct BugModel:Identifiable, ACCardModel, ACDetailsModel {
         abailabilityNorth: String,
         abailabilitySouth: String,
         sellingPriceNook: Int,
-        sellingPriceFlick: Int
+        sellingPriceKamilo: Int
     ) {
         self.specie = specie
         self.catchPhrase = catchPhrase
@@ -61,7 +61,7 @@ struct BugModel:Identifiable, ACCardModel, ACDetailsModel {
         self.abailabilityNorth = abailabilityNorth
         self.abailabilitySouth = abailabilitySouth
         self.sellingPriceNook = sellingPriceNook
-        self.sellingPriceFlick = sellingPriceFlick
+        self.sellingPriceKamilo = sellingPriceKamilo
     }
 }
 
@@ -82,7 +82,7 @@ extension BugModel {
         abailabilityNorth: "Jul – Sep",
         abailabilitySouth: "Jan – Mar",
         sellingPriceNook: 160,
-        sellingPriceFlick: 240
+        sellingPriceKamilo: 240
     )
     static let mock2 = BugModel(
         specie: "Ant",
@@ -93,7 +93,7 @@ extension BugModel {
         abailabilityNorth: "All year",
         abailabilitySouth: "All year",
         sellingPriceNook: 80,
-        sellingPriceFlick: 120
+        sellingPriceKamilo: 120
     )
     static let mock3 = BugModel(
         specie: "Ladybug",
@@ -104,7 +104,7 @@ extension BugModel {
         abailabilityNorth: "Mar – Jun; Oct",
         abailabilitySouth: "Apr; Sep – Dec",
         sellingPriceNook: 200,
-        sellingPriceFlick: 300
+        sellingPriceKamilo: 300
     )
     static let mock4 = BugModel(
         specie: "Monarch Butterfly",
@@ -115,7 +115,7 @@ extension BugModel {
         abailabilityNorth: "Sep – Nov",
         abailabilitySouth: "Mar – May",
         sellingPriceNook: 140,
-        sellingPriceFlick: 210
+        sellingPriceKamilo: 210
     )
     static let mock5 = BugModel(
         specie: "Mosquito",
@@ -126,6 +126,6 @@ extension BugModel {
         abailabilityNorth: "Jun – Sep",
         abailabilitySouth: "Dec – Mar",
         sellingPriceNook: 130,
-        sellingPriceFlick: 195
+        sellingPriceKamilo: 195
     )
 }

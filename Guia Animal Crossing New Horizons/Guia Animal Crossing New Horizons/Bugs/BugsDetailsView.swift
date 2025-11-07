@@ -7,13 +7,18 @@
 
 import SwiftUI
 
-struct BugsDetailsView: View {
+struct BugsDetailsView: BaseView {
+    @StateObject var viewModel: BugsViewModel
     let bug: BugModel
+    
     var body: some View {
         ACDetailsTemplate(model: bug)
     }
 }
 
 #Preview {
-    BugsDetailsView(bug: BugModel.mock1)
+    BugsDetailsView(
+        viewModel: BugsViewModel(),
+        bug: BugModel.mock1
+    )
 }

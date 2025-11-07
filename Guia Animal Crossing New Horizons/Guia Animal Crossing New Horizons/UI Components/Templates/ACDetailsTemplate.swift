@@ -45,6 +45,7 @@ struct ACDetailsTemplate: View {
             ){
                 locationView
                 importantInfoView
+                timeView
             }
             
             Section (
@@ -81,50 +82,38 @@ struct ACDetailsTemplate: View {
     }
     
     var locationView: some View {
-        HStack {
-            Text("Lugar: ")
-            Text(model.location)
-                .font(.system(size: size))
-        }
+        viewType(title: "Lugar: ", content: model.location)
         
     }
     
     var importantInfoView: some View {
-        HStack {
-            Text("Sombra: ")
-            Text(model.importantInfo)
-                .font(.system(size: size))
-        }
+        viewType(title: "Clima: ", content: model.importantInfo)
+    }
+    
+    var timeView: some View {
+        viewType(title: "Hora: ", content: model.time)
     }
     
     var abailabilityNorthView: some View {
-        HStack {
-            Text("Hemisferio norte: ")
-            Text(model.abailabilityNorth)
-                .font(.system(size: size))
-        }
+        viewType(title: "Hemisferio norte: ", content: model.abailabilityNorth)
     }
     
     var abailabilitySouthView: some View {
-        HStack {
-            Text("Hemisferio sur: ")
-            Text(model.abailabilitySouth)
-                .font(.system(size: size))
-        }
+        viewType(title: "Hemisferio sur: ", content: model.abailabilitySouth)
     }
     
     var sellingNookView: some View {
-        HStack {
-            Text("Tom Nook: ")
-            Text("\(model.sellingPriceNook) bayas")
-                .font(.system(size: size))
-        }
+        viewType(title: "Tom Nook: ", content: "\(model.sellingPriceNook) bayas")
     }
     
     var sellingOtherView: some View {
+        viewType(title: "Kamilo", content: "\(model.sellingPriceOther) bayas")
+    }
+    
+    func viewType(title: String, content: String) -> some View {
         HStack {
-            Text("CJ: ")
-            Text("\(model.sellingPriceOther) bayas")
+            Text(title)
+            Text(content)
                 .font(.system(size: size))
         }
     }

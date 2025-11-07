@@ -11,7 +11,7 @@ import SwiftUI
 struct Guia_Animal_Crossing_New_HorizonsApp: App {
     var body: some Scene {
         WindowGroup {
-            VillagersView()
+            TabBarView()
         }
     }
 }

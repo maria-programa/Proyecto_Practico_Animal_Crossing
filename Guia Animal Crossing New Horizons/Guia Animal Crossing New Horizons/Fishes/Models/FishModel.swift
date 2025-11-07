@@ -8,12 +8,22 @@
 import Foundation
 import SwiftUI
 
-struct FishModel: Identifiable, ACCardModel {
+struct FishModel: Identifiable, ACCardModel, ACDetailsModel {
+        
     let id = UUID()
     let specie: String
     let fishIcon: Image = Image(systemName:"fish")
     let foregroundColor: Color = .white
     let backgroundColor: Color = .cyan
+    
+    let catchPhrase: String
+    let location: String
+    let time: String
+    let shadowSize: String
+    let abailabilityNorth: String
+    let abailabilitySouth: String
+    let sellingPriceNook: Int
+    let sellingPriceCJ: Int
     
     //Estas variables son para poder conformar el protocolo de ACCardmodel, ya que ahí las variables se llaman image y name. Lo hacemos así porque cuando recuperemos los datos de la API, por ejemplo, no sabemos que nombre le habrán dado a cada cosa y esto es el apaño que se hace
     var image: Image {
@@ -24,14 +34,13 @@ struct FishModel: Identifiable, ACCardModel {
         return specie
     }
     
-    let catchPhrase: String
-    let location: String
-    let time: String
-    let shadowSize: String
-    let abailabilityNorth: String
-    let abailabilitySouth: String
-    let sellingPriceNook: Int
-    let sellingPriceCJ: Int
+    var importantInfo: String {
+        return shadowSize
+    }
+    
+    var sellingPriceOther: Int {
+        return sellingPriceCJ
+    }
     
     init(
         specie: String,

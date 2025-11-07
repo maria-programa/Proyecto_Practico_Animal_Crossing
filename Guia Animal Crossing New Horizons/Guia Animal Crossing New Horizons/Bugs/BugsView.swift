@@ -7,8 +7,84 @@
 
 import SwiftUI
 
-struct BugsView: ACCollectionTemplate {
-    let model: BugsModelView = BugsModelView()
+struct BugsView: BaseView {
+    @StateObject var viewModel = BugsViewModel()
+    
+    var body: some View {
+        Group {
+            switch viewModel.state {
+            case .initial, .loading:
+                loadingView
+            case .success:
+                contentView
+            case .failure:
+                errorView
+            }
+        }
+        .navigationTitle(viewModel.modelView.screenTitle)
+        .onAppear {
+            Task {
+                await viewModel.onAppear()
+            }
+        }
+    }
+    
+    var loadingView: some View {
+        Text("Loading...")
+    }
+    
+    var contentView: some View {
+        VStack {
+            ScrollView {
+                descriptionView
+                collectionList
+            }
+        }
+    }
+    
+    var errorView: some View {
+        VStack {
+            Text("Something went wrong. Please try again")
+            Button {
+                Task {
+                   await viewModel.onAppear()
+                }
+            } label: {
+                Text("Retry")
+            }
+            .buttonStyle(.borderedProminent)
+        }
+    }
+    
+    var descriptionView: some View {
+        Text(viewModel.modelView.description)
+            .padding()
+            .background(
+                Color("descriptionBackground"),
+                in: RoundedRectangle(cornerRadius: 24)
+            )
+    }
+    
+    var column: GridItem {
+        GridItem(.fixed(150))
+    }
+    
+    var collectionList: some View {
+        LazyVGrid (
+            columns: [
+                column,
+                column
+            ]
+        ) {
+            ForEach(viewModel.modelView.collectionItems, id: \.id) { collectionItem in
+                NavigationLink(value: collectionItem) {
+                    ACCard(model: collectionItem) { _ in
+                        
+                    }
+                }
+            }
+        }
+    }
     
     func onCardTapped(model: any ACCardModel) {
         print("\(model.name) was tapped")

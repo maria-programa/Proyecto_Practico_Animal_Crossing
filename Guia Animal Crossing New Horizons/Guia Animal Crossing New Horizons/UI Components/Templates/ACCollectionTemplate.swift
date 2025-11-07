@@ -26,8 +26,6 @@ protocol ACCollectionTemplate: View {
     var descriptionView: DescriptionView { get }
     var column: GridItem { get }
     var collectionList: CollectionList { get }
-    //var descriptionBackgroundColor: Color { get }
-    //var cornerRadius: CGFloat { get }
 }
 
 extension ACCollectionTemplate {

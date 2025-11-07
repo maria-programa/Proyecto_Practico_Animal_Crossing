@@ -13,7 +13,11 @@ struct TabBarView: View {
             NavigationStack {
                 VillagersView()
                     .navigationDestination(for: VillagerModel.self) { villager in
-                        VillagerDetailsView(villager: villager)
+                        VillagerDetailsView(
+                            viewModel: VillagerDetailViewModel(
+                                modelView: villager
+                            )
+                        )
                     }
             }
             .tabItem {
@@ -23,7 +27,10 @@ struct TabBarView: View {
             NavigationStack {
                 FishesView()
                     .navigationDestination(for: FishModel.self) { fish in
-                        FishDetailsView(fish: fish)
+                        FishDetailsView(
+                            viewModel: FishesViewModel(),
+                            fish: fish
+                        )
                             .navigationTitle(Text(fish.name))
                     }
             }
@@ -34,7 +41,10 @@ struct TabBarView: View {
             NavigationStack {
                 BugsView()
                     .navigationDestination(for: BugModel.self) { bug in
-                        BugsDetailsView(bug: bug)
+                        BugsDetailsView(
+                            viewModel: BugsViewModel(),
+                            bug: bug
+                        )
                             .navigationTitle(Text(bug.name))
                     }
             }
