@@ -44,10 +44,10 @@ struct BugsView: BaseView {
     
     var errorView: some View {
         VStack {
-            Text("Something went wrong. Please try again")
+            Text(viewModel.modelView.errorDescription)
             Button {
                 Task {
-                   await viewModel.onAppear()
+                    await viewModel.onAppear()
                 }
             } label: {
                 Text("Retry")
@@ -65,16 +65,16 @@ struct BugsView: BaseView {
             )
     }
     
-    var column: GridItem {
-        GridItem(.fixed(150))
+    var columns: [GridItem] {
+        [
+            GridItem(.fixed(150), spacing: 24),
+            GridItem(.fixed(150), spacing: 24)
+        ]
     }
     
     var collectionList: some View {
         LazyVGrid (
-            columns: [
-                column,
-                column
-            ]
+            columns: columns
         ) {
             ForEach(viewModel.modelView.collectionItems, id: \.id) { collectionItem in
                 NavigationLink(value: collectionItem) {

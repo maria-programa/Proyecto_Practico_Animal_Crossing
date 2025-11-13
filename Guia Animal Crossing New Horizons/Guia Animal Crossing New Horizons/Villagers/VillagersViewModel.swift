@@ -16,6 +16,7 @@ import Combine
 class VillagersViewModel: BaseViewModel {
     @Published var modelView: VillagersModelView
     @Published var state: ViewModelState = .initial
+    let api = APICall()
     
     init(modelView: VillagersModelView = VillagersModelView()) {
         self.modelView = modelView
@@ -30,19 +31,13 @@ class VillagersViewModel: BaseViewModel {
     private func loadVillagers() async {
         do {
             state = .loading
-            //-------
-            guard let url = URL(string: "https://api.nookipedia.com/villagers")
-            else{
-                return
-            }
             
-            var urlRequest = URLRequest(url: url)
-            urlRequest.httpMethod = "GET"
-            urlRequest.allHTTPHeaderFields = ["X-API-KEY":"bc30978a-43a8-4df6-83f9-1acd0b8628bb"]
-            
-            let (data, response) = try await URLSession.shared.data(for: urlRequest)
-            let decodedData = try JSONDecoder().decode(Array<VillagerModelServer>.self, from: data)
-            //-------
+            let decodedData = try await api.request(
+                endpoint: "villagers",
+                method: .get,
+                modelServer: Array<VillagerModelServer>.self
+            )
+        
             let villagers = decodedData.compactMap { model in
                 VillagerModel(
                     image: Image(systemName: "person.fill"),
@@ -54,13 +49,13 @@ class VillagersViewModel: BaseViewModel {
                     birthdayDay: model.birthday_day,
                     birthdayMonth: model.birthday_month
                 )
-                
             }
             
             modelView.collectionItems = villagers
             state = .success
             
         } catch {
+            modelView.errorDescription = error.localizedDescription
             state = .failure
         }
     }

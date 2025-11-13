@@ -28,8 +28,7 @@ struct TabBarView: View {
                 FishesView()
                     .navigationDestination(for: FishModel.self) { fish in
                         FishDetailsView(
-                            viewModel: FishesViewModel(),
-                            fish: fish
+                            viewModel: FishDetailViewModel(modelView: fish)
                         )
                             .navigationTitle(Text(fish.name))
                     }
@@ -42,8 +41,7 @@ struct TabBarView: View {
                 BugsView()
                     .navigationDestination(for: BugModel.self) { bug in
                         BugsDetailsView(
-                            viewModel: BugsViewModel(),
-                            bug: bug
+                            viewModel: BugDetailViewModel(modelView: bug)
                         )
                             .navigationTitle(Text(bug.name))
                     }

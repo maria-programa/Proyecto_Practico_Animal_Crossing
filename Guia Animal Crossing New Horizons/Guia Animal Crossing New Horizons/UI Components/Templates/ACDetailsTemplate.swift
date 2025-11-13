@@ -8,6 +8,10 @@
 import SwiftUI
 
 protocol ACDetailsModel {
+    var action: String { get }
+    var info: String { get }
+    var buyer: String { get }
+    
     var image: Image { get }
     var catchPhrase: String { get }
     var location: String { get }
@@ -40,7 +44,7 @@ struct ACDetailsTemplate: View {
             imageView
             catchPhraseView
             Section (
-                header: Text("Información de pesca")
+                header: Text("Información de \(model.action)")
                     .foregroundStyle(Color.white)
             ){
                 locationView
@@ -87,7 +91,7 @@ struct ACDetailsTemplate: View {
     }
     
     var importantInfoView: some View {
-        viewType(title: "Clima: ", content: model.importantInfo)
+        viewType(title: model.info, content: model.importantInfo)
     }
     
     var timeView: some View {
@@ -107,7 +111,7 @@ struct ACDetailsTemplate: View {
     }
     
     var sellingOtherView: some View {
-        viewType(title: "Kamilo", content: "\(model.sellingPriceOther) bayas")
+        viewType(title: model.buyer, content: "\(model.sellingPriceOther) bayas")
     }
     
     func viewType(title: String, content: String) -> some View {

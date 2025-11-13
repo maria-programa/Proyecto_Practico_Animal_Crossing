@@ -49,16 +49,16 @@ extension ACCollectionTemplate {
             )
     }
     
-    var column: GridItem {
-        GridItem(.fixed(150))
+    var columns: [GridItem] {
+        [
+            GridItem(.fixed(150), spacing: 24),
+            GridItem(.fixed(150), spacing: 24)
+        ]
     }
     
     var collectionList: some View {
         LazyVGrid (
-            columns: [
-                column,
-                column
-            ]
+            columns: columns
         ) {
             ForEach(model.collectionItems, id: \.id) { collectionItem in
                 NavigationLink(value: collectionItem) {

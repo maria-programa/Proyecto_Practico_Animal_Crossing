@@ -44,7 +44,7 @@ struct VillagersView: BaseView {
     
     var errorView: some View {
         VStack {
-            Text("Something went wrong. Please try again")
+            Text(viewModel.modelView.errorDescription)
             Button {
                 Task {
                    await viewModel.onAppear()
