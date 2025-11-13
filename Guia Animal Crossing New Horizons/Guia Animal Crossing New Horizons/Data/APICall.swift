@@ -87,6 +87,7 @@ class APICall {
             else {
                 throw APIError.badResponse
             }
+            self.log(data)
             return data
         } catch {
             throw APIError.serverError
@@ -102,6 +103,13 @@ class APICall {
             return decodedData
         } catch {
             throw APIError.decode
+        }
+    }
+    
+    private func log(_ data: Data) {
+        if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
+           let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
+            print(String(decoding: jsonData, as: UTF8.self))
         }
     }
 }

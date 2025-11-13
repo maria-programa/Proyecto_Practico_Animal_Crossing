@@ -8,7 +8,8 @@
 import SwiftUI
 
 protocol ACCardModel {
-    var image: Image { get }
+    var imageURL: URL? { get }
+    var defaultImage: Image { get }
     var name: String { get }
     var foregroundColor: Color { get }
     var backgroundColor: Color { get }
@@ -65,10 +66,19 @@ struct ACCard: View {
     }
     
     var imageView: some View {
-        model.image
-            .resizable()
-            .scaledToFit()
-            .frame(height: imageHeight)
+        AsyncImage(
+            url: model.imageURL
+        ) { image in
+            image
+                .resizable()
+                .scaledToFit()
+                .frame(height: imageHeight)
+        } placeholder: {
+            model.defaultImage
+                .resizable()
+                .scaledToFit()
+                .frame(height: imageHeight)
+        }
     }
     
     var textView: some View {

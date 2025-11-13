@@ -46,7 +46,8 @@ class BugsViewModel: BaseViewModel {
                     abailabilityNorth: model.north.availability_array.first?.months ?? "",
                     abailabilitySouth: model.south.availability_array.first?.months ?? "",
                     sellingPriceNook: model.sell_nook,
-                    sellingPriceKamilo: model.sell_flick
+                    sellingPriceKamilo: model.sell_flick,
+                    imageURL: URL(string: model.image_url)
                 )
             }
             

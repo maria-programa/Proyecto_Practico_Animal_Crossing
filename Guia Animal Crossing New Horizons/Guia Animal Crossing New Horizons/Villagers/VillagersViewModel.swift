@@ -47,7 +47,8 @@ class VillagersViewModel: BaseViewModel {
                     specie: model.species,
                     gender: model.gender,
                     birthdayDay: model.birthday_day,
-                    birthdayMonth: model.birthday_month
+                    birthdayMonth: model.birthday_month,
+                    imageURL: URL(string: model.image_url)
                 )
             }
             

@@ -12,7 +12,7 @@ protocol ACDetailsModel {
     var info: String { get }
     var buyer: String { get }
     
-    var image: Image { get }
+    var defaultImage: Image { get }
     var catchPhrase: String { get }
     var location: String { get }
     var time: String { get }
@@ -74,7 +74,7 @@ struct ACDetailsTemplate: View {
     }
     
     var imageView: some View {
-        model.image
+        model.defaultImage
             .resizable()
             .scaledToFit()
             .frame(width: .infinity)

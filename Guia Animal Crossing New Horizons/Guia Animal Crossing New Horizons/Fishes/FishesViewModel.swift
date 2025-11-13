@@ -44,7 +44,8 @@ class FishesViewModel: BaseViewModel {
                     abailabilityNorth: model.north.availability_array.first?.months ?? "",
                     abailabilitySouth: model.south.availability_array.first?.months ?? "",
                     sellingPriceNook: model.sell_nook,
-                    sellingPriceCJ: model.sell_cj
+                    sellingPriceCJ: model.sell_cj,
+                    imageURL: URL(string: model.image_url)
                 )
                 
             }

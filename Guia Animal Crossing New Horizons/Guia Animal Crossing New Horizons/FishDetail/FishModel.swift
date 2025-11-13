@@ -28,7 +28,8 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
     let sellingPriceNook: Int
     let sellingPriceCJ: Int
     
-    var image: Image {
+    var imageURL: URL?
+    var defaultImage: Image {
         return fishIcon
     }
     
@@ -53,7 +54,8 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
         abailabilityNorth: String,
         abailabilitySouth: String,
         sellingPriceNook: Int,
-        sellingPriceCJ: Int
+        sellingPriceCJ: Int,
+        imageURL: URL? = nil // TODO: quitar valor por defecto
     ) {
         self.specie = specie
         self.catchPhrase = catchPhrase
@@ -64,6 +66,7 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
         self.abailabilitySouth = abailabilitySouth
         self.sellingPriceNook = sellingPriceNook
         self.sellingPriceCJ = sellingPriceCJ
+        self.imageURL = imageURL
     }
 }
 

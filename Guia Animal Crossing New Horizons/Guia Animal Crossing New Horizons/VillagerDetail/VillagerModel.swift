@@ -10,7 +10,7 @@ import SwiftUI
 
 struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
     let id = UUID()
-    var image: Image
+    var defaultImage: Image
     var name: String
     var foregroundColor: Color = Color("primaryText")
     var backgroundColor: Color = Color("villagerCard")
@@ -20,6 +20,7 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
     let gender: String
     let birthdayDay: String
     let birthdayMonth: String
+    var imageURL: URL?
     
     init(
         image: Image,
@@ -29,9 +30,10 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
         specie: String,
         gender: String,
         birthdayDay: String,
-        birthdayMonth: String
+        birthdayMonth: String,
+        imageURL: URL? = nil // TODO: quitar valor por defecto
     ) {
-        self.image = image
+        self.defaultImage = image
         self.name = name
         self.quote = quote
         self.phrase = phrase
@@ -39,6 +41,7 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
         self.gender = gender
         self.birthdayDay = birthdayDay
         self.birthdayMonth = birthdayMonth
+        self.imageURL = imageURL
     }
 }
 

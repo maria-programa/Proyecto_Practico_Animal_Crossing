@@ -38,7 +38,7 @@ struct VillagerDetailsView: BaseView {
     }
 
     var villagerPicture: some View {
-        viewModel.modelView.image
+        viewModel.modelView.defaultImage
             .resizable()
             .scaledToFit()
             .padding()
