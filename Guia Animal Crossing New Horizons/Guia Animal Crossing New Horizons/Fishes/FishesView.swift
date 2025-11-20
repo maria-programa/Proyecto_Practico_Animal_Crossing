@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FishesView: View {
+struct FishesView: BaseView {
     @StateObject var viewModel = FishesViewModel()
         
     var body: some View {
@@ -78,9 +78,12 @@ struct FishesView: View {
         ) {
             ForEach(viewModel.modelView.collectionItems, id: \.id) { collectionItem in
                 NavigationLink(value: collectionItem) {
-                    ACCard(model: collectionItem) { _ in
-                        
-                    }
+                    ACCard(
+                        model: collectionItem) { _ in
+                            
+                        } likeAction: { likeModel in
+                            
+                        }
                 }
             }
         }

@@ -62,9 +62,12 @@ extension ACCollectionTemplate {
         ) {
             ForEach(model.collectionItems, id: \.id) { collectionItem in
                 NavigationLink(value: collectionItem) {
-                    ACCard(model: collectionItem) { _ in
-                        
-                    }
+                    ACCard(
+                        model: collectionItem) { _ in
+                            
+                        } likeAction: { likeModel in
+                            
+                        }
                 }
             }
         }

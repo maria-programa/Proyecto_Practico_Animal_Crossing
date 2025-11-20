@@ -48,7 +48,8 @@ class VillagersViewModel: BaseViewModel {
                     gender: model.gender,
                     birthdayDay: model.birthday_day,
                     birthdayMonth: model.birthday_month,
-                    imageURL: URL(string: model.image_url)
+                    imageURL: URL(string: model.image_url),
+                    isLiked: checkIfModelIsLiked(model.name)
                 )
             }
             
@@ -59,6 +60,10 @@ class VillagersViewModel: BaseViewModel {
             modelView.errorDescription = error.localizedDescription
             state = .failure
         }
+    }
+    
+    private func checkIfModelIsLiked(_ id: String) -> Bool {
+        return false
     }
 }
 

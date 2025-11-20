@@ -14,7 +14,9 @@ class FishesViewModel: BaseViewModel {
     @Published var modelView: FishesModelView
     let api = APICall()
     
-    init(modelView: FishesModelView = FishesModelView()) {
+    init(
+        modelView: FishesModelView = FishesModelView()
+    ) {
         self.modelView = modelView
     }
     
@@ -45,7 +47,9 @@ class FishesViewModel: BaseViewModel {
                     abailabilitySouth: model.south.availability_array.first?.months ?? "",
                     sellingPriceNook: model.sell_nook,
                     sellingPriceCJ: model.sell_cj,
-                    imageURL: URL(string: model.image_url)
+                    imageURL: URL(string: model.image_url),
+                    renderImageURL: URL(string: model.render_url),
+                    isLiked: checkIfModelIsLiked(model.name)
                 )
                 
             }
@@ -57,6 +61,10 @@ class FishesViewModel: BaseViewModel {
             modelView.errorDescription = error.localizedDescription
             state = .failure
         }
+    }
+    
+    private func checkIfModelIsLiked(_ id: String) -> Bool {
+        return false
     }
 }
 

@@ -11,6 +11,7 @@ protocol ACDetailsModel {
     var action: String { get }
     var info: String { get }
     var buyer: String { get }
+    var renderImageURL: URL? { get }
     
     var defaultImage: Image { get }
     var catchPhrase: String { get }
@@ -66,18 +67,23 @@ struct ACDetailsTemplate: View {
                 sellingNookView
                 sellingOtherView
             }
-            
-            
         }
         .background(model.backgroundColor)
         .scrollContentBackground(.hidden)
     }
     
     var imageView: some View {
-        model.defaultImage
-            .resizable()
-            .scaledToFit()
-            .frame(width: .infinity)
+        AsyncImage(
+            url: model.renderImageURL
+        ) { image in
+            image
+                .resizable()
+                .scaledToFit()
+        } placeholder: {
+            model.defaultImage
+                .resizable()
+                .scaledToFit()
+        }
     }
     
     var catchPhraseView: some View {

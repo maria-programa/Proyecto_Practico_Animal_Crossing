@@ -47,7 +47,9 @@ class BugsViewModel: BaseViewModel {
                     abailabilitySouth: model.south.availability_array.first?.months ?? "",
                     sellingPriceNook: model.sell_nook,
                     sellingPriceKamilo: model.sell_flick,
-                    imageURL: URL(string: model.image_url)
+                    imageURL: URL(string: model.image_url),
+                    renderImageURL: URL(string: model.render_url),
+                    isLiked: checkIfModelIsLiked(model.name)
                 )
             }
             
@@ -57,6 +59,10 @@ class BugsViewModel: BaseViewModel {
             modelView.errorDescription = error.localizedDescription
             state = .failure
         }
+    }
+    
+    private func checkIfModelIsLiked(_ id: String) -> Bool {
+        return false
     }
 }
 

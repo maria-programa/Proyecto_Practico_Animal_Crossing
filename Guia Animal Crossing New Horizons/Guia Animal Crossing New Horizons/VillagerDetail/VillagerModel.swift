@@ -14,6 +14,8 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
     var name: String
     var foregroundColor: Color = Color("primaryText")
     var backgroundColor: Color = Color("villagerCard")
+    var isLiked: Bool
+    
     let quote: String
     let phrase: String
     let specie: String
@@ -31,7 +33,8 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
         gender: String,
         birthdayDay: String,
         birthdayMonth: String,
-        imageURL: URL? = nil // TODO: quitar valor por defecto
+        imageURL: URL? = nil, // TODO: quitar valor por defecto
+        isLiked: Bool
     ) {
         self.defaultImage = image
         self.name = name
@@ -42,6 +45,7 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
         self.birthdayDay = birthdayDay
         self.birthdayMonth = birthdayMonth
         self.imageURL = imageURL
+        self.isLiked = isLiked
     }
 }
 
@@ -61,7 +65,8 @@ extension VillagerModel {
         specie: "Ardilla",
         gender: "Masculino",
         birthdayDay: "29",
-        birthdayMonth: "septiembre"
+        birthdayMonth: "septiembre",
+        isLiked: false
     )
     static let mock2 = VillagerModel(
         image: Image(systemName: "teddybear.fill"),
@@ -71,7 +76,8 @@ extension VillagerModel {
         specie: "Oso",
         gender: "Masulino",
         birthdayDay: "26",
-        birthdayMonth: "septiembre"
+        birthdayMonth: "septiembre",
+        isLiked: false
     )
     static let mock3 = VillagerModel(
         image: Image(systemName: "person.fill"),
@@ -81,7 +87,8 @@ extension VillagerModel {
         specie: "Koala",
         gender: "Femenino",
         birthdayDay: "12",
-        birthdayMonth: "abril"
+        birthdayMonth: "abril",
+        isLiked: false
     )
     static let mock4 = VillagerModel(
         image: Image(systemName: "teddybear.fill"),
@@ -91,7 +98,8 @@ extension VillagerModel {
         specie: "Osito",
         gender: "Femenino",
         birthdayDay: "24",
-        birthdayMonth: "junio"
+        birthdayMonth: "junio",
+        isLiked: false
     )
     static let mock5 = VillagerModel(
         image: Image(systemName: "hare.fill"),
@@ -101,7 +109,8 @@ extension VillagerModel {
         specie: "Conejo",
         gender: "Masculino",
         birthdayDay: "19",
-        birthdayMonth: "mayo"
+        birthdayMonth: "mayo",
+        isLiked: false
     )
     static let mock6 = VillagerModel(
         image: Image(systemName: "dog.fill"),
@@ -111,7 +120,8 @@ extension VillagerModel {
         specie: "Perro",
         gender: "Femenino",
         birthdayDay: "27",
-        birthdayMonth: "diciembre"
+        birthdayMonth: "diciembre",
+        isLiked: false
     )
     static let mock7 = VillagerModel(
         image: Image(systemName: "person.fill"),
@@ -121,7 +131,8 @@ extension VillagerModel {
         specie: "Ciervo",
         gender: "Masculino",
         birthdayDay: "5",
-        birthdayMonth: "abril"
+        birthdayMonth: "abril",
+        isLiked: false
     )
     static let mock8 = VillagerModel(
         image: Image(systemName: "person.fill"),
@@ -131,6 +142,7 @@ extension VillagerModel {
         specie: "Pulpo",
         gender: "Masculino",
         birthdayDay: "8",
-        birthdayMonth: "marzo"
+        birthdayMonth: "marzo",
+        isLiked: false
     )
 }

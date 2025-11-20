@@ -1,14 +1,14 @@
 //
-//  BugsView.swift
+//  FossilsView.swift
 //  Guia Animal Crossing New Horizons
 //
-//  Created by Maria Lozano Ovejero on 22/10/25.
+//  Created by Maria Lozano Ovejero on 14/11/25.
 //
 
 import SwiftUI
 
-struct BugsView: BaseView {
-    @StateObject var viewModel = BugsViewModel()
+struct FossilsView: BaseView {
+    @StateObject var viewModel = FossilsViewModel()
     
     var body: some View {
         Group {
@@ -47,7 +47,7 @@ struct BugsView: BaseView {
             Text(viewModel.modelView.errorDescription)
             Button {
                 Task {
-                    await viewModel.onAppear()
+                   await viewModel.onAppear()
                 }
             } label: {
                 Text("Retry")
@@ -82,20 +82,14 @@ struct BugsView: BaseView {
                         model: collectionItem) { _ in
                             
                         } likeAction: { _ in
-                           
+                            viewModel.handleLikedItem(collectionItem)
                         }
                 }
             }
         }
     }
-    
-    func onCardTapped(model: any ACCardModel) {
-        print("\(model.name) was tapped")
-    }
 }
 
 #Preview {
-    NavigationStack {
-        BugsView()
-    }
+    FossilsView()
 }

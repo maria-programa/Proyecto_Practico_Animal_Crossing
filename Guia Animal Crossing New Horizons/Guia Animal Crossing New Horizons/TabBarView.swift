@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TabBarView: View {
+    @StateObject var themeManager = ThemeManager()
+    
     var body: some View {
         TabView {
             NavigationStack {
@@ -48,6 +50,32 @@ struct TabBarView: View {
             }
             .tabItem {
                 Label("Bichos", systemImage: "ladybug.fill")
+            }
+            
+            NavigationStack {
+                FossilsView()
+                    .navigationDestination(for: FossilModel.self) { fossil in
+                        FossilDetailsView(
+                            viewModel: FossilDetailViewModel(modelView: fossil)
+                        )
+                        .navigationTitle(Text(fossil.name))
+                    }
+            }
+            .tabItem {
+                Label("Fósiles", systemImage: "fossil.shell.fill")
+            }
+            
+            SettingsView()
+                .tabItem {
+                    Label("Ajustes", systemImage: "gear")
+                }
+                .environmentObject(themeManager)
+        }
+        .preferredColorScheme(themeManager.getScheme())
+        .onAppear {
+            //TODO: conectar con el valor que tiene en el UserDefaults
+            if let isDark = UserDefaultsManager().get(forKey: .theme, type: Bool.self) {
+                themeManager.isDark = isDark
             }
         }
     }

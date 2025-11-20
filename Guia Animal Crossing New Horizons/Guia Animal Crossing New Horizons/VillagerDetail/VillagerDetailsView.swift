@@ -38,12 +38,21 @@ struct VillagerDetailsView: BaseView {
     }
 
     var villagerPicture: some View {
-        viewModel.modelView.defaultImage
-            .resizable()
-            .scaledToFit()
-            .padding()
-            .modifier(Encapsulated(color: Color.black))
-            .frame(width: 150, height: 150)
+        AsyncImage(
+            url: viewModel.modelView.imageURL
+        ) { image in
+                image
+                .resizable()
+                .scaledToFit()
+                .padding()
+                .frame(width: 150, height: 150)
+            } placeholder: {
+                viewModel.modelView.defaultImage
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .modifier(Encapsulated(color: Color.black))
+            }
     }
     
     var villagerName: some View {

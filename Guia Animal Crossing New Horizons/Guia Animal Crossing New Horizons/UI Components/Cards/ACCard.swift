@@ -13,13 +13,14 @@ protocol ACCardModel {
     var name: String { get }
     var foregroundColor: Color { get }
     var backgroundColor: Color { get }
+    var isLiked: Bool { get set }
 }
 
 struct ACCard: View {
     let model: ACCardModel
     let cardAction: ((ACCardModel) -> Void)
+    let likeAction: ((ACCardModel) -> Void)
     
-    @State private var isLiked: Bool = false
     //MARK: Card Constants
     let spacing: CGFloat = 8
     let cornerRadius: CGFloat = 24
@@ -32,10 +33,12 @@ struct ACCard: View {
     
     init(
         model: ACCardModel,
-        cardAction: @escaping ((ACCardModel) -> Void)
+        cardAction: @escaping ((ACCardModel) -> Void),
+        likeAction: @escaping ((ACCardModel) -> Void)
     ) {
         self.model = model
         self.cardAction = cardAction
+        self.likeAction = likeAction
     }
     
     var body: some View {
@@ -90,14 +93,14 @@ struct ACCard: View {
     var likeButton: some View {
         Button {
             withAnimation {
-                isLiked.toggle()
+                likeAction(model)
             }
         } label: {
-            Image(systemName: isLiked ? "heart.fill" : "heart")
+            Image(systemName: model.isLiked ? "heart.fill" : "heart")
                 .resizable()
                 .scaledToFit()
-                .frame(height: isLiked ? 25 : 20)
-                .foregroundStyle(isLiked ? .red : .white)
+                .frame(height: model.isLiked ? 25 : 20)
+                .foregroundStyle(model.isLiked ? .red : .white)
         }
         
     }
@@ -107,5 +110,7 @@ struct ACCard: View {
 #Preview {
     ACCard(model: FishModel.mock1) { model in
         print("\(model.name) was tapped")
+    } likeAction: { model in
+        
     }
 }

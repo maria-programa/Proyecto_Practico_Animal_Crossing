@@ -15,6 +15,7 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
     let fishIcon: Image = Image(systemName:"fish")
     let foregroundColor: Color = .white
     let backgroundColor: Color = .cyan
+    var isLiked: Bool
     
     let action: String = "pesca"
     let info: String = "Sombra: "
@@ -29,6 +30,7 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
     let sellingPriceCJ: Int
     
     var imageURL: URL?
+    var renderImageURL: URL?
     var defaultImage: Image {
         return fishIcon
     }
@@ -55,7 +57,9 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
         abailabilitySouth: String,
         sellingPriceNook: Int,
         sellingPriceCJ: Int,
-        imageURL: URL? = nil // TODO: quitar valor por defecto
+        imageURL: URL? = nil, // TODO: quitar valor por defecto
+        renderImageURL: URL? = nil, //TODO: quitar el valor por defecto
+        isLiked: Bool
     ) {
         self.specie = specie
         self.catchPhrase = catchPhrase
@@ -67,6 +71,8 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
         self.sellingPriceNook = sellingPriceNook
         self.sellingPriceCJ = sellingPriceCJ
         self.imageURL = imageURL
+        self.renderImageURL = renderImageURL
+        self.isLiked = isLiked
     }
 }
 
@@ -87,7 +93,8 @@ extension FishModel {
         abailabilityNorth: "Nov - Apr",
         abailabilitySouth: "May - Nov",
         sellingPriceNook: 7000,
-        sellingPriceCJ: 10500
+        sellingPriceCJ: 10500,
+        isLiked: false
     )
     static let mock2 = FishModel(
         specie: "Salmon",
@@ -98,7 +105,8 @@ extension FishModel {
         abailabilityNorth: "Sep",
         abailabilitySouth: "Mar",
         sellingPriceNook: 700,
-        sellingPriceCJ: 1050
+        sellingPriceCJ: 1050,
+        isLiked: false
     )
     static let mock3 = FishModel(
         specie: "Tilapia",
@@ -109,7 +117,8 @@ extension FishModel {
         abailabilityNorth: "Jun - Oct",
         abailabilitySouth: "Dec - Apr",
         sellingPriceNook: 800,
-        sellingPriceCJ: 1200
+        sellingPriceCJ: 1200,
+        isLiked: false
     )
     static let mock4 = FishModel(
         specie: "Koi",
@@ -120,7 +129,8 @@ extension FishModel {
         abailabilityNorth: "All year",
         abailabilitySouth: "All year",
         sellingPriceNook: 4000,
-        sellingPriceCJ: 6000
+        sellingPriceCJ: 6000,
+        isLiked: false
     )
     static let mock5 = FishModel(
         specie: "Horse mackerel",
@@ -131,7 +141,8 @@ extension FishModel {
         abailabilityNorth: "All year",
         abailabilitySouth: "All year",
         sellingPriceNook: 150,
-        sellingPriceCJ: 225
+        sellingPriceCJ: 225,
+        isLiked: false
     )
     static let mock6 = FishModel(
         specie: "Golden trout",
@@ -142,7 +153,8 @@ extension FishModel {
         abailabilityNorth: "Mar - May; Sep - Nov",
         abailabilitySouth: "Mar - May; Sep - Nov",
         sellingPriceNook: 15000,
-        sellingPriceCJ: 22500
+        sellingPriceCJ: 22500,
+        isLiked: false
     )
     static let mock7 = FishModel(
         specie: "Crawfish",
@@ -153,7 +165,8 @@ extension FishModel {
         abailabilityNorth: "Apr - Sep",
         abailabilitySouth: "Oct - Mar",
         sellingPriceNook: 200,
-        sellingPriceCJ: 300
+        sellingPriceCJ: 300,
+        isLiked: false
     )
     static let mock8 = FishModel(
         specie: "Shark",
@@ -164,6 +177,7 @@ extension FishModel {
         abailabilityNorth: "Jun – Sep",
         abailabilitySouth: "Dec – Mar",
         sellingPriceNook: 15000,
-        sellingPriceCJ: 22500
+        sellingPriceCJ: 22500,
+        isLiked: false
     )
 }
