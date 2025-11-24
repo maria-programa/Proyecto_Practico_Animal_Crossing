@@ -21,17 +21,9 @@ struct SettingsView: BaseView {
         VStack {
             themeSetting
         }
-//        .onAppear {
-//            //TODO: conectar con el valor que tiene en el UserDefaults
-//            if let isDark = viewModel.getTheme() {
-//                themeManager.isDark = isDark
-//            }
-//        }
         .onChange(
             of: themeManager.isDark
         ) { newValue in
-                //TODO: cambiar el valor que tiene en el UserDefaults
-//            userDefaultManager.set(value: newValue, forKey: .theme)
             viewModel.setTheme(isDark: newValue)
         }
     }
