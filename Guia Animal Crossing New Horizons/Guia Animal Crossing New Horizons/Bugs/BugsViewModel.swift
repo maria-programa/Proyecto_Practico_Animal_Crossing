@@ -13,6 +13,7 @@ class BugsViewModel: BaseViewModel {
     @Published var state: ViewModelState = .initial
     @Published var modelView: BugsModelView
     let api = APICall()
+    let userDefaultManager = UserDefaultsManager()
     
     init(
         model: BugsModelView = BugsModelView()
@@ -24,6 +25,20 @@ class BugsViewModel: BaseViewModel {
         if modelView.collectionItems.isEmpty {
             await loadBugs()
         }
+    }
+    
+    func handleLikedItem(_ model: BugModel) {
+        guard let modelIndex = modelView.collectionItems.firstIndex(of: model)
+        else {
+            return
+        }
+        
+        if model.isLiked {
+            userDefaultManager.deleteItems(model.name, .likedBugs)
+        } else {
+            userDefaultManager.saveItems(model.name, .likedBugs)
+        }
+        modelView.collectionItems[modelIndex].isLiked.toggle()
     }
     
     private func loadBugs() async {
@@ -49,7 +64,7 @@ class BugsViewModel: BaseViewModel {
                     sellingPriceKamilo: model.sell_flick,
                     imageURL: URL(string: model.image_url),
                     renderImageURL: URL(string: model.render_url),
-                    isLiked: checkIfModelIsLiked(model.name)
+                    isLiked: userDefaultManager.checkIfItemIsLiked(model.name, .likedBugs)
                 )
             }
             

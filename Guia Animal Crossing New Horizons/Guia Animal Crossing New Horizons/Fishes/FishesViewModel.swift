@@ -13,6 +13,7 @@ class FishesViewModel: BaseViewModel {
     @Published var state: ViewModelState = .initial
     @Published var modelView: FishesModelView
     let api = APICall()
+    let userDefaultManager = UserDefaultsManager()
     
     init(
         modelView: FishesModelView = FishesModelView()
@@ -24,6 +25,20 @@ class FishesViewModel: BaseViewModel {
         if modelView.collectionItems.isEmpty {
             await loadFishes()
         }
+    }
+    
+    func handleLikedItem(_ model: FishModel) {
+        guard let modelIndex = modelView.collectionItems.firstIndex(of: model)
+        else {
+            return
+        }
+        
+        if model.isLiked {
+            userDefaultManager.deleteItems(model.name, .likedFishes)
+        } else {
+            userDefaultManager.saveItems(model.name, .likedFishes)
+        }
+        modelView.collectionItems[modelIndex].isLiked.toggle()
     }
     
     private func loadFishes() async {
@@ -49,7 +64,7 @@ class FishesViewModel: BaseViewModel {
                     sellingPriceCJ: model.sell_cj,
                     imageURL: URL(string: model.image_url),
                     renderImageURL: URL(string: model.render_url),
-                    isLiked: checkIfModelIsLiked(model.name)
+                    isLiked: userDefaultManager.checkIfItemIsLiked(model.name, .likedFishes)
                 )
                 
             }
@@ -61,10 +76,6 @@ class FishesViewModel: BaseViewModel {
             modelView.errorDescription = error.localizedDescription
             state = .failure
         }
-    }
-    
-    private func checkIfModelIsLiked(_ id: String) -> Bool {
-        return false
     }
 }
 

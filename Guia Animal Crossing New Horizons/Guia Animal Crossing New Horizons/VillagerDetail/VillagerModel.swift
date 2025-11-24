@@ -10,6 +10,7 @@ import SwiftUI
 
 struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
     let id = UUID()
+    let villagerID: String
     var defaultImage: Image
     var name: String
     var foregroundColor: Color = Color("primaryText")
@@ -25,6 +26,7 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
     var imageURL: URL?
     
     init(
+        villagerID: String,
         image: Image,
         name: String,
         quote: String,
@@ -36,6 +38,7 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
         imageURL: URL? = nil, // TODO: quitar valor por defecto
         isLiked: Bool
     ) {
+        self.villagerID = villagerID
         self.defaultImage = image
         self.name = name
         self.quote = quote
@@ -58,6 +61,7 @@ extension VillagerModel: Hashable {
 
 extension VillagerModel {
     static let mock1 = VillagerModel(
+        villagerID: "1",
         image: Image(systemName: "person.fill"),
         name: "Munchi",
         quote: "Vive cada día como si fuera irrepetible",
@@ -69,6 +73,7 @@ extension VillagerModel {
         isLiked: false
     )
     static let mock2 = VillagerModel(
+        villagerID: "2",
         image: Image(systemName: "teddybear.fill"),
         name: "Teddy",
         quote: "¡Hay que sufrir para llegar a donde quieres!",
@@ -80,6 +85,7 @@ extension VillagerModel {
         isLiked: false
     )
     static let mock3 = VillagerModel(
+        villagerID: "3",
         image: Image(systemName: "person.fill"),
         name: "Melba",
         quote: "¡El mundo sería horrible si no hubiera abrazos!",
@@ -91,6 +97,7 @@ extension VillagerModel {
         isLiked: false
     )
     static let mock4 = VillagerModel(
+        villagerID: "4",
         image: Image(systemName: "teddybear.fill"),
         name: "Celeste",
         quote: "Si no es bonito, me lo quito",
@@ -102,6 +109,7 @@ extension VillagerModel {
         isLiked: false
     )
     static let mock5 = VillagerModel(
+        villagerID: "5",
         image: Image(systemName: "hare.fill"),
         name: "Ariel",
         quote: "Todo tiene su momento y mi momento ha llegado.",
@@ -113,6 +121,7 @@ extension VillagerModel {
         isLiked: false
     )
     static let mock6 = VillagerModel(
+        villagerID: "6",
         image: Image(systemName: "dog.fill"),
         name: "Tere",
         quote: "¡Los perros y los gatos pueden ser grandes amigos!",
@@ -124,6 +133,7 @@ extension VillagerModel {
         isLiked: false
     )
     static let mock7 = VillagerModel(
+        villagerID: "7",
         image: Image(systemName: "person.fill"),
         name: "Lope",
         quote: "Si asistes a la fiesta, te pierdes la fiesta.",
@@ -135,6 +145,7 @@ extension VillagerModel {
         isLiked: false
     )
     static let mock8 = VillagerModel(
+        villagerID: "8",
         image: Image(systemName: "person.fill"),
         name: "Paulino",
         quote: "Las cosas pasan porque tienen que pasar.",

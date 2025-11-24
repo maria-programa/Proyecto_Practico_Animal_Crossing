@@ -34,27 +34,9 @@ class FossilsViewModel: BaseViewModel {
         }
         
         if model.isLiked {
-            guard let savedIds = userDefaultManager.get(forKey: .likedFossils, type: Array<String>.self),
-                  !savedIds.isEmpty,
-                  let index = savedIds.firstIndex(of: model.name)
-            else {
-                return
-            }
-            var updatedIds = savedIds
-            updatedIds.remove(at: index)
-            userDefaultManager.set(value: updatedIds, forKey: .likedFossils)
+            userDefaultManager.deleteItems(model.name, .likedFossils)
         } else {
-            if let savedIds = userDefaultManager.get(forKey: .likedFossils, type: Array<String>.self) {
-                if savedIds.isEmpty {
-                    userDefaultManager.set(value: [model.name], forKey: .likedFossils)
-                } else {
-                    var updatedIds = savedIds
-                    updatedIds.append(model.name)
-                    userDefaultManager.set(value: updatedIds, forKey: .likedFossils)
-                }
-            } else {
-                userDefaultManager.set(value: [model.name], forKey: .likedFossils)
-            }
+            userDefaultManager.saveItems(model.name, .likedFossils)
         }
         modelView.collectionItems[modelIndex].isLiked.toggle()
     }
@@ -76,7 +58,7 @@ class FossilsViewModel: BaseViewModel {
                     fossilGroup: model.fossilGroup,
                     sellingPrice: model.sell,
                     interactable: model.interactable,
-                    isLiked: checkIfModelIsLiked(model.name)
+                    isLiked: userDefaultManager.checkIfItemIsLiked(model.name, .likedFossils)
                 )
             }
             modelView.collectionItems = fossils
@@ -85,15 +67,6 @@ class FossilsViewModel: BaseViewModel {
             modelView.errorDescription = error.localizedDescription
             state = .failure
         }
-    }
-    
-    private func checkIfModelIsLiked(_ id: String) -> Bool {
-        guard let savedIds = userDefaultManager.get(forKey: .likedFossils, type: Array<String>.self),
-              !savedIds.isEmpty
-        else {
-            return false
-        }
-        return savedIds.contains(id)
     }
 }
 

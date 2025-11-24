@@ -82,7 +82,7 @@ struct VillagersView: BaseView {
                         model: collectionItem) { _ in
                             
                         } likeAction: { likeModel in
-                            
+                            viewModel.handleLikedItem(collectionItem)
                         }
                 }
             }

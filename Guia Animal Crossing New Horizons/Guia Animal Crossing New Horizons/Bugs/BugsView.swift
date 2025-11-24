@@ -82,7 +82,7 @@ struct BugsView: BaseView {
                         model: collectionItem) { _ in
                             
                         } likeAction: { _ in
-                           
+                            viewModel.handleLikedItem(collectionItem)
                         }
                 }
             }

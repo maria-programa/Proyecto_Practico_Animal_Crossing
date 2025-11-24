@@ -17,6 +17,7 @@ class VillagersViewModel: BaseViewModel {
     @Published var modelView: VillagersModelView
     @Published var state: ViewModelState = .initial
     let api = APICall()
+    let userDefaultManager = UserDefaultsManager()
     
     init(modelView: VillagersModelView = VillagersModelView()) {
         self.modelView = modelView
@@ -26,6 +27,21 @@ class VillagersViewModel: BaseViewModel {
         if modelView.collectionItems.isEmpty {
             await loadVillagers()
         }
+    }
+    
+    func handleLikedItem(_ model: VillagerModel) {
+        guard let modelIndex = modelView.collectionItems.firstIndex(of: model)
+        else {
+            return
+        }
+        
+        if model.isLiked {
+            userDefaultManager.deleteItems(model.villagerID, .likedVillagers)
+        } else {
+            userDefaultManager.saveItems(model.villagerID, .likedVillagers)
+
+        }
+        modelView.collectionItems[modelIndex].isLiked.toggle()
     }
     
     private func loadVillagers() async {
@@ -40,6 +56,7 @@ class VillagersViewModel: BaseViewModel {
         
             let villagers = decodedData.compactMap { model in
                 VillagerModel(
+                    villagerID: model.id,
                     image: Image(systemName: "person.fill"),
                     name: model.name,
                     quote: model.quote,
@@ -49,7 +66,7 @@ class VillagersViewModel: BaseViewModel {
                     birthdayDay: model.birthday_day,
                     birthdayMonth: model.birthday_month,
                     imageURL: URL(string: model.image_url),
-                    isLiked: checkIfModelIsLiked(model.name)
+                    isLiked: userDefaultManager.checkIfItemIsLiked(model.id, .likedVillagers)
                 )
             }
             
@@ -60,10 +77,6 @@ class VillagersViewModel: BaseViewModel {
             modelView.errorDescription = error.localizedDescription
             state = .failure
         }
-    }
-    
-    private func checkIfModelIsLiked(_ id: String) -> Bool {
-        return false
     }
 }
 
