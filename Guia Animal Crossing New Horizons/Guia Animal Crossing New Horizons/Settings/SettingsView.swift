@@ -18,8 +18,9 @@ struct SettingsView: BaseView {
     }
     
     var body: some View {
-        VStack {
+        List {
             themeSetting
+            radioButtons
         }
         .onChange(
             of: themeManager.isDark
@@ -31,6 +32,20 @@ struct SettingsView: BaseView {
     var themeSetting: some View {
         Toggle("Tema", isOn: $themeManager.isDark)
             .padding(.horizontal)
+    }
+    
+    var radioButtons: some View {
+        VStack(
+            
+        ) {
+            Text("Política de Datos")
+            ForEach(viewModel.modelView.radioButtonCollection, id: \.id) {
+                radioButton in ACRadioButton(model: radioButton) {_ in 
+                    viewModel.handleSelectedRadioButton(radioButton)
+                }
+            }
+        }
+        .padding(.horizontal)
     }
 }
 

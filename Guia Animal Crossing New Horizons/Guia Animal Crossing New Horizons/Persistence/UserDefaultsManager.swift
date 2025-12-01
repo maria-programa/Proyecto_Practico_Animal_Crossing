@@ -37,4 +37,5 @@ enum UserDefaultKeys: String {
     case likedFishes
     case likedBugs
     case likedFossils
+    case selectedRadioButton
 }

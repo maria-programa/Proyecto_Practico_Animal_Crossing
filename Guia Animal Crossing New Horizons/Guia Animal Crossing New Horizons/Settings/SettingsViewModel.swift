@@ -35,4 +35,40 @@ class SettingsViewModel: BaseViewModel {
     func setTheme(isDark: Bool) {
         userDefaultManager.set(value: isDark, forKey: .theme)
     }
+    
+    func handleSelectedRadioButton(_ model: RadioButtonModelView) {
+        if model.isSelected {
+            setRadioButton(model.label)
+        }
+    }
+    
+//    private func checkIfModelIsSelected(_ id: String) -> Bool {
+//        let savedID = getRadioButton()
+//        guard !savedID.isEmpty
+//        else {
+//            return false
+//        }
+//        return savedID.contains(id)
+//    }
+    
+    private func getRadioButton() -> String {
+        guard let savedRadioButton = userDefaultManager.get(forKey: .selectedRadioButton, type: String.self)
+        else {
+            return ""
+        }
+        return savedRadioButton
+    }
+    
+    private func setRadioButton(_ id: String) {
+        userDefaultManager.set(value: id, forKey: .selectedRadioButton)
+    }
+    
+    private func saveRadioButton(_ id: String) {
+        let saveRadioButton = getRadioButton()
+        setRadioButton(id)
+    }
+    
+    private func deleteRadioButton() {
+        
+    }
 }
