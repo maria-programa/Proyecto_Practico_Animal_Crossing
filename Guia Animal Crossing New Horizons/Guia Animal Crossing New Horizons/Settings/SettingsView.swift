@@ -18,7 +18,9 @@ struct SettingsView: BaseView {
     }
     
     var body: some View {
-        List {
+        VStack(
+            alignment: .leading
+        ) {
             themeSetting
             radioButtons
         }
@@ -35,12 +37,10 @@ struct SettingsView: BaseView {
     }
     
     var radioButtons: some View {
-        VStack(
-            
-        ) {
+        VStack {
             Text("Política de Datos")
-            ForEach(viewModel.modelView.radioButtonCollection, id: \.id) {
-                radioButton in ACRadioButton(model: radioButton) {_ in 
+            ForEach(viewModel.modelView.radioButtonCollection, id: \.self) {
+                radioButton in ACRadioButton(model: radioButton) { _ in
                     viewModel.handleSelectedRadioButton(radioButton)
                 }
             }

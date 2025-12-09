@@ -19,13 +19,15 @@ class SettingsViewModel: BaseViewModel {
     ) {
         self.modelView = modelView
         self.state = state
+        
+        loadSavedRadioSelection()
     }
     
-    func onAppear() {
-//        userDefaultManager.set(value: modelView.isDark, forKey: .theme)
-        let userTheme = userDefaultManager.get(forKey: .theme, type: Bool.self)
-        userDefaultManager.set(value: userTheme, forKey: .theme)
-    }
+    //    func onAppear() {
+    //       userDefaultManager.set(value: modelView.isDark, forKey: .theme)
+    //        let userTheme = userDefaultManager.get(forKey: .theme, type: Bool.self)
+    //        userDefaultManager.set(value: userTheme, forKey: .theme)
+    //    }
     
     func getTheme() -> Bool? {
         let userTheme = userDefaultManager.get(forKey: .theme, type: Bool.self)
@@ -37,19 +39,22 @@ class SettingsViewModel: BaseViewModel {
     }
     
     func handleSelectedRadioButton(_ model: RadioButtonModelView) {
-        if model.isSelected {
-            setRadioButton(model.label)
+        guard let index = modelView.radioButtonCollection.firstIndex(of: model)
+        else {
+            return
+        }
+        
+        if model.isSelected == false {
+            modelView.radioButtonCollection.indices.forEach {
+                modelView.radioButtonCollection[$0].isSelected = false
+            }
+            modelView.radioButtonCollection[index].isSelected = true
+            saveRadioButton(model.label)
+        } else {
+            modelView.radioButtonCollection[index].isSelected = false
+            deleteRadioButton()
         }
     }
-    
-//    private func checkIfModelIsSelected(_ id: String) -> Bool {
-//        let savedID = getRadioButton()
-//        guard !savedID.isEmpty
-//        else {
-//            return false
-//        }
-//        return savedID.contains(id)
-//    }
     
     private func getRadioButton() -> String {
         guard let savedRadioButton = userDefaultManager.get(forKey: .selectedRadioButton, type: String.self)
@@ -59,16 +64,34 @@ class SettingsViewModel: BaseViewModel {
         return savedRadioButton
     }
     
-    private func setRadioButton(_ id: String) {
-        userDefaultManager.set(value: id, forKey: .selectedRadioButton)
+    private func setRadioButton(_ label: String) {
+        userDefaultManager.set(value: label, forKey: .selectedRadioButton)
     }
     
-    private func saveRadioButton(_ id: String) {
-        let saveRadioButton = getRadioButton()
-        setRadioButton(id)
+    private func loadSavedRadioSelection() {
+        let saved = getRadioButton()
+        guard !saved.isEmpty else { return }
+
+        modelView.radioButtonCollection.indices.forEach { index in
+            modelView.radioButtonCollection[index].isSelected =
+                (modelView.radioButtonCollection[index].label == saved)
+        }
+    }
+    
+    private func saveRadioButton(_ label: String) {
+        let saved = getRadioButton()
+            
+        if saved.isEmpty || saved != label {
+            setRadioButton(label)
+        }
     }
     
     private func deleteRadioButton() {
-        
+        let savedRadioButton = getRadioButton()
+        guard !savedRadioButton.isEmpty
+        else {
+            return
+        }
+        setRadioButton("")
     }
 }
