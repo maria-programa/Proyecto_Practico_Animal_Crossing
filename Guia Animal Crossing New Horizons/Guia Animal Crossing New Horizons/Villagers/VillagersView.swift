@@ -65,16 +65,13 @@ struct VillagersView: BaseView {
             )
     }
     
-    var column: GridItem {
-        GridItem(.fixed(150))
+    var columns: [GridItem] {
+        [GridItem(.adaptive(minimum: 150))]
     }
     
     var collectionList: some View {
         LazyVGrid (
-            columns: [
-                column,
-                column
-            ]
+            columns: columns
         ) {
             ForEach(viewModel.modelView.collectionItems, id: \.id) { collectionItem in
                 NavigationLink(value: collectionItem) {
@@ -87,6 +84,7 @@ struct VillagersView: BaseView {
                 }
             }
         }
+        .padding()
     }
     
     func onCardTapped(model: any ACCardModel) {

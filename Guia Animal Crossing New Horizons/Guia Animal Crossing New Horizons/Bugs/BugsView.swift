@@ -66,10 +66,7 @@ struct BugsView: BaseView {
     }
     
     var columns: [GridItem] {
-        [
-            GridItem(.fixed(150), spacing: 24),
-            GridItem(.fixed(150), spacing: 24)
-        ]
+        [GridItem(.adaptive(minimum: 150))]
     }
     
     var collectionList: some View {
@@ -87,6 +84,7 @@ struct BugsView: BaseView {
                 }
             }
         }
+        .padding()
     }
     
     func onCardTapped(model: any ACCardModel) {
