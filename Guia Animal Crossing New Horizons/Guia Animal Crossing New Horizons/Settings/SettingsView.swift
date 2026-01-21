@@ -18,11 +18,18 @@ struct SettingsView: BaseView {
     }
     
     var body: some View {
-        VStack(
-            alignment: .leading
-        ) {
-            themeSetting
-            radioButtons
+        NavigationStack {
+            VStack(
+                alignment: .leading
+            ) {
+                themeSetting
+                Spacer()
+                    .frame(height: 24)
+                radioButtons
+                Spacer()
+                    .frame(height: 24)
+                favourites
+            }
         }
         .onChange(
             of: themeManager.isDark
@@ -44,6 +51,21 @@ struct SettingsView: BaseView {
                     viewModel.handleSelectedRadioButton(radioButton)
                 }
             }
+        }
+        .padding(.horizontal)
+    }
+    
+    var favourites: some View {
+        NavigationLink {
+            FavouritesView()
+        } label: {
+            HStack {
+                Text("Favoritos")
+                    .foregroundStyle(.black)
+                Image(systemName: "heart.fill")
+                    .foregroundStyle(.red)
+            }
+            
         }
         .padding(.horizontal)
     }
