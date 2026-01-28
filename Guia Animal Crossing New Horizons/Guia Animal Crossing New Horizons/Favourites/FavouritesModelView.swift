@@ -13,4 +13,8 @@ struct FavouritesModelView: BaseModelView {
     var likedFishes: [String] = []
     var likedBugs: [String] = []
     var likedFossils: [String] = []
+    
+    var favouritesIsEmpty: Bool {
+        likedVillagers.isEmpty && likedFishes.isEmpty && likedBugs.isEmpty && likedFossils.isEmpty
+    }
 }

@@ -12,6 +12,10 @@ struct FavouritesView: BaseView {
     
     var body: some View {
         List {
+            if viewModel.modelView.favouritesIsEmpty {
+                Text("Aún no hay favoritos")
+            }
+            
             if !viewModel.modelView.likedVillagers.isEmpty {
                 Section(
                     header: Text("Vecinos")
@@ -51,8 +55,8 @@ struct FavouritesView: BaseView {
     }
     
     var likedVillagersView: some View {
-        ForEach(viewModel.modelView.likedVillagers, id: \.self) { likedVillagers in
-            Text(likedVillagers)
+        ForEach(Array(viewModel.favouritesStore.villagers.values), id: \.villagerID) { likedVillager in
+            Text(likedVillager.name)
         }
     }
     

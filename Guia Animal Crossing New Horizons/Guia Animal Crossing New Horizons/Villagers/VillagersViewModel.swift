@@ -18,6 +18,7 @@ class VillagersViewModel: BaseViewModel {
     @Published var state: ViewModelState = .initial
     let api = APICall()
     let userDefaultManager = UserDefaultsManager()
+    let favouritesStore = FavouritesStore.shared
     
     init(modelView: VillagersModelView = VillagersModelView()) {
         self.modelView = modelView
@@ -37,8 +38,10 @@ class VillagersViewModel: BaseViewModel {
         
         if model.isLiked {
             userDefaultManager.deleteItems(model.villagerID, .likedVillagers)
+            favouritesStore.deleteVillager(id: model.villagerID)
         } else {
             userDefaultManager.saveItems(model.villagerID, .likedVillagers)
+            favouritesStore.addVillager(model)
 
         }
         modelView.collectionItems[modelIndex].isLiked.toggle()
@@ -55,7 +58,7 @@ class VillagersViewModel: BaseViewModel {
             )
         
             let villagers = decodedData.compactMap { model in
-                VillagerModel(
+            let villager = VillagerModel(
                     villagerID: model.id,
                     image: Image(systemName: "person.fill"),
                     name: model.name,
@@ -68,6 +71,12 @@ class VillagersViewModel: BaseViewModel {
                     imageURL: URL(string: model.image_url),
                     isLiked: userDefaultManager.checkIfItemIsLiked(model.id, .likedVillagers)
                 )
+                
+                if villager.isLiked {
+                    favouritesStore.addVillager(villager)
+                }
+                
+                return villager
             }
             
             modelView.collectionItems = villagers

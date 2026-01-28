@@ -12,6 +12,7 @@ class FavouritesViewModel: BaseViewModel {
     @Published var modelView: FavouritesModelView
     @Published var state: ViewModelState
     let userDefaultManager = UserDefaultsManager()
+    let favouritesStore = FavouritesStore.shared
     
     init(
         modelView: FavouritesModelView = FavouritesModelView(),
