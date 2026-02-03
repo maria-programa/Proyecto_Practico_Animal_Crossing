@@ -14,6 +14,7 @@ class BugsViewModel: BaseViewModel {
     @Published var modelView: BugsModelView
     let api = APICall()
     let userDefaultManager = UserDefaultsManager()
+    let favouritesStore = FavouritesStore.shared
     
     init(
         model: BugsModelView = BugsModelView()
@@ -35,8 +36,10 @@ class BugsViewModel: BaseViewModel {
         
         if model.isLiked {
             userDefaultManager.deleteItems(model.name, .likedBugs)
+            favouritesStore.deleteBug(id: model.name)
         } else {
             userDefaultManager.saveItems(model.name, .likedBugs)
+            favouritesStore.addBug(model)
         }
         modelView.collectionItems[modelIndex].isLiked.toggle()
     }
@@ -52,7 +55,7 @@ class BugsViewModel: BaseViewModel {
             )
             
             let bugs = decodedData.compactMap { model in
-                BugModel(
+                let bug = BugModel(
                     specie: model.name,
                     catchPhrase: model.catchphrases.first ?? "",
                     location: model.location,
@@ -66,6 +69,12 @@ class BugsViewModel: BaseViewModel {
                     renderImageURL: URL(string: model.render_url),
                     isLiked: userDefaultManager.checkIfItemIsLiked(model.name, .likedBugs)
                 )
+                
+                if bug.isLiked {
+                    favouritesStore.addBug(bug)
+                }
+                
+                return bug
             }
             
             modelView.collectionItems = bugs
@@ -76,9 +85,9 @@ class BugsViewModel: BaseViewModel {
         }
     }
     
-    private func checkIfModelIsLiked(_ id: String) -> Bool {
-        return false
-    }
+//    private func checkIfModelIsLiked(_ id: String) -> Bool {
+//        return false
+//    }
 }
 
 struct BugModelServer: Decodable {

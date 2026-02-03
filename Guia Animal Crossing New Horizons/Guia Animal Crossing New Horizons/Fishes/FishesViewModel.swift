@@ -14,6 +14,7 @@ class FishesViewModel: BaseViewModel {
     @Published var modelView: FishesModelView
     let api = APICall()
     let userDefaultManager = UserDefaultsManager()
+    let favouritesStore = FavouritesStore.shared
     
     init(
         modelView: FishesModelView = FishesModelView()
@@ -35,8 +36,10 @@ class FishesViewModel: BaseViewModel {
         
         if model.isLiked {
             userDefaultManager.deleteItems(model.name, .likedFishes)
+            favouritesStore.deleteFish(id: model.name)
         } else {
             userDefaultManager.saveItems(model.name, .likedFishes)
+            favouritesStore.addFish(model)
         }
         modelView.collectionItems[modelIndex].isLiked.toggle()
     }
@@ -52,7 +55,7 @@ class FishesViewModel: BaseViewModel {
             )
             
             let fishes = decodedData.compactMap { model in
-                FishModel (
+                let fish = FishModel (
                     specie: model.name,
                     catchPhrase: model.catchphrases.first ?? "",
                     location: model.location,
@@ -67,6 +70,11 @@ class FishesViewModel: BaseViewModel {
                     isLiked: userDefaultManager.checkIfItemIsLiked(model.name, .likedFishes)
                 )
                 
+                if fish.isLiked {
+                    favouritesStore.addFish(fish)
+                }
+                
+                return fish
             }
             
             modelView.collectionItems = fishes

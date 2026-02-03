@@ -14,6 +14,7 @@ class FossilsViewModel: BaseViewModel {
     @Published var state: ViewModelState = .initial
     let api = APICall()
     let userDefaultManager = UserDefaultsManager()
+    let favouritesStore = FavouritesStore.shared
     
     init(
         modelView: FossilsModelView = FossilsModelView()
@@ -35,8 +36,10 @@ class FossilsViewModel: BaseViewModel {
         
         if model.isLiked {
             userDefaultManager.deleteItems(model.name, .likedFossils)
+            favouritesStore.deleteFossil(id: model.name)
         } else {
             userDefaultManager.saveItems(model.name, .likedFossils)
+            favouritesStore.addFossil(model)
         }
         modelView.collectionItems[modelIndex].isLiked.toggle()
     }
@@ -52,7 +55,7 @@ class FossilsViewModel: BaseViewModel {
             )
             
             let fossils = decodedData.compactMap { model in
-                FossilModel (
+            let fossil = FossilModel (
                     imageURL: URL(string: model.imageURL),
                     name: model.name,
                     fossilGroup: model.fossilGroup,
@@ -60,6 +63,11 @@ class FossilsViewModel: BaseViewModel {
                     interactable: model.interactable,
                     isLiked: userDefaultManager.checkIfItemIsLiked(model.name, .likedFossils)
                 )
+                if fossil.isLiked {
+                    favouritesStore.addFossil(fossil)
+                }
+                
+                return fossil
             }
             modelView.collectionItems = fossils
             state = .success

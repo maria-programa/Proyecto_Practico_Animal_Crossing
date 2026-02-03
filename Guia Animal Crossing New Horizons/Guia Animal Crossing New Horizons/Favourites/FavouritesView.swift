@@ -61,20 +61,20 @@ struct FavouritesView: BaseView {
     }
     
     var likedFishesView: some View {
-        ForEach(viewModel.modelView.likedFishes, id: \.self) { likedFishes in
-            Text(likedFishes)
+        ForEach(Array(viewModel.favouritesStore.fishes.values), id: \.specie) { likedFishes in
+            Text(likedFishes.name)
         }
     }
     
     var likedBugsView: some View {
-        ForEach(viewModel.modelView.likedBugs, id: \.self) { likedBugs in
-            Text(likedBugs)
+        ForEach(Array(viewModel.favouritesStore.bugs.values), id: \.specie) { likedBugs in
+            Text(likedBugs.name)
         }
     }
     
     var likedFossilsView: some View {
-        ForEach(viewModel.modelView.likedFossils, id: \.self) { likedFossils in
-            Text(likedFossils)
+        ForEach(Array(viewModel.favouritesStore.fossils.values), id: \.name) { likedFossils in
+            Text(likedFossils.name)
         }
     }
 }
