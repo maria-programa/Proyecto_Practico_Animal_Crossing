@@ -52,7 +52,8 @@ class VillagersViewModel: BaseViewModel {
             state = .loading
             
             let decodedData = try await api.request(
-                endpoint: "villagers",
+//                endpoint: "villagers",
+                endpoint: "villagers?nhdetails=true",
                 method: .get,
                 modelServer: Array<VillagerModelServer>.self
             )
@@ -69,6 +70,7 @@ class VillagersViewModel: BaseViewModel {
                     birthdayDay: model.birthday_day,
                     birthdayMonth: model.birthday_month,
                     imageURL: URL(string: model.image_url),
+//                    iconURL: URL(string: model.nh_details.iconUrl),
                     isLiked: userDefaultManager.checkIfItemIsLiked(model.id, .likedVillagers)
                 )
                 
@@ -110,49 +112,49 @@ struct VillagerModelServer: Decodable {
     let islander: Bool
     let debut: String
     let appearances: [String]
-    //let nh_details: NHDetailsServer
+//    let nh_details: NHDetailsServer
 }
 
-//struct NHDetailsServer: Decodable {
-//    let imageUrl: String
-//    let photoUrl: String
-//    let iconUrl: String
-//    let quote: String
-//    let subPersonality: String
-//    let catchphrase: String
-//    let clothing: String
-//    let clothingVariation: String
-//    let favStyles: [String]
-//    let favColors: [String]
-//    let hobby: String
-//    let houseInteriorUrl: String
-//    let houseExteriorUrl: String
-//    let houseWallpaper: String
-//    let houseFlooring: String
-//    let houseMusic: String
-//    let houseMusicNote: String
-//    let umbrella: String
-//    
-//    public enum CodingKeys: String, CodingKey {
-//        case imageUrl = "image_url"
-//        case photoUrl = "photo_url"
-//        case iconUrl = "icon_url"
-//        case quote = "quote"
-//        case subPersonality = "sub-personality"
-//        case catchphrase = "catchphrase"
-//        case clothing = "clothing"
-//        case clothingVariation = "clothing_variation"
-//        case favStyles = "fav_styles"
-//        case favColors = "fav_colors"
-//        case hobby = "hobby"
-//        case houseInteriorUrl = "house_interior_url"
-//        case houseExteriorUrl = "house_exterior_url"
-//        case houseWallpaper = "house_wallpaper"
-//        case houseFlooring = "house_flooring"
-//        case houseMusic = "house_music"
-//        case houseMusicNote = "house_music_note"
-//        case umbrella = "umbrella"
-//    }
-//}
+struct NHDetailsServer: Decodable {
+    let imageUrl: String
+    let photoUrl: String
+    let iconUrl: String
+    let quote: String
+    let subPersonality: String
+    let catchphrase: String
+    let clothing: String
+    let clothingVariation: String
+    let favStyles: [String]
+    let favColors: [String]
+    let hobby: String
+    let houseInteriorUrl: String
+    let houseExteriorUrl: String
+    let houseWallpaper: String
+    let houseFlooring: String
+    let houseMusic: String
+    let houseMusicNote: String
+    let umbrella: String
+    
+    public enum CodingKeys: String, CodingKey {
+        case imageUrl = "image_url"
+        case photoUrl = "photo_url"
+        case iconUrl = "icon_url"
+        case quote
+        case subPersonality = "sub-personality"
+        case catchphrase
+        case clothing
+        case clothingVariation = "clothing_variation"
+        case favStyles = "fav_styles"
+        case favColors = "fav_colors"
+        case hobby
+        case houseInteriorUrl = "house_interior_url"
+        case houseExteriorUrl = "house_exterior_url"
+        case houseWallpaper = "house_wallpaper"
+        case houseFlooring = "house_flooring"
+        case houseMusic = "house_music"
+        case houseMusicNote = "house_music_note"
+        case umbrella
+    }
+}
 
 

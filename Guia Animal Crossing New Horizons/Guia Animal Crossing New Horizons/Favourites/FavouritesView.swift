@@ -56,25 +56,101 @@ struct FavouritesView: BaseView {
     
     var likedVillagersView: some View {
         ForEach(Array(viewModel.favouritesStore.villagers.values), id: \.villagerID) { likedVillager in
-            Text(likedVillager.name)
+            HStack {
+                AsyncImage(
+                    url: likedVillager.imageURL
+                ) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32)
+                } placeholder: {
+                    likedVillager.defaultImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 48)
+                }
+                
+                Spacer()
+                    .frame(width: 24)
+                
+                Text(likedVillager.name)
+            }
         }
     }
     
     var likedFishesView: some View {
         ForEach(Array(viewModel.favouritesStore.fishes.values), id: \.specie) { likedFishes in
-            Text(likedFishes.name)
+            HStack {
+                AsyncImage(
+                    url: likedFishes.imageURL
+                ) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32)
+                } placeholder: {
+                    likedFishes.defaultImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 48)
+                }
+                
+                Spacer()
+                    .frame(width: 24)
+                
+                Text(likedFishes.name)
+            }
         }
     }
     
     var likedBugsView: some View {
         ForEach(Array(viewModel.favouritesStore.bugs.values), id: \.specie) { likedBugs in
-            Text(likedBugs.name)
+            HStack {
+                AsyncImage(
+                    url: likedBugs.imageURL
+                ) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32)
+                } placeholder: {
+                    likedBugs.defaultImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 48)
+                }
+                
+                Spacer()
+                    .frame(width: 24)
+                
+                Text(likedBugs.name)
+            }
         }
     }
     
     var likedFossilsView: some View {
         ForEach(Array(viewModel.favouritesStore.fossils.values), id: \.name) { likedFossils in
-            Text(likedFossils.name)
+            HStack {
+                AsyncImage(
+                    url: likedFossils.imageURL
+                ) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32)
+                } placeholder: {
+                    likedFossils.defaultImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 48)
+                }
+                
+                Spacer()
+                    .frame(width: 24)
+                
+                Text(likedFossils.name)
+            }
         }
     }
 }

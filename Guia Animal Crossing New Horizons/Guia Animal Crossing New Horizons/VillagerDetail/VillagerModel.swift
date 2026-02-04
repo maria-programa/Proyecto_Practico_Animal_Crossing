@@ -24,6 +24,7 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
     let birthdayDay: String
     let birthdayMonth: String
     var imageURL: URL?
+    var iconURL: URL?
     
     init(
         villagerID: String,
@@ -36,6 +37,7 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
         birthdayDay: String,
         birthdayMonth: String,
         imageURL: URL? = nil, // TODO: quitar valor por defecto
+        iconURL: URL? = nil,
         isLiked: Bool
     ) {
         self.villagerID = villagerID
@@ -48,6 +50,7 @@ struct VillagerModel: Identifiable, ACCardModel, BaseModelView {
         self.birthdayDay = birthdayDay
         self.birthdayMonth = birthdayMonth
         self.imageURL = imageURL
+        self.iconURL = iconURL
         self.isLiked = isLiked
     }
 }
