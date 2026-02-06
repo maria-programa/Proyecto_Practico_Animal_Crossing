@@ -70,7 +70,7 @@ class VillagersViewModel: BaseViewModel {
                     birthdayDay: model.birthday_day,
                     birthdayMonth: model.birthday_month,
                     imageURL: URL(string: model.image_url),
-//                    iconURL: URL(string: model.nh_details.iconUrl),
+                    iconURL: URL(string: model.nh_details?.iconUrl ?? ""),
                     isLiked: userDefaultManager.checkIfItemIsLiked(model.id, .likedVillagers)
                 )
                 
@@ -112,7 +112,7 @@ struct VillagerModelServer: Decodable {
     let islander: Bool
     let debut: String
     let appearances: [String]
-//    let nh_details: NHDetailsServer
+    let nh_details: NHDetailsServer?
 }
 
 struct NHDetailsServer: Decodable {

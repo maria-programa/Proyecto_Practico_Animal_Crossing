@@ -8,7 +8,7 @@
 import Foundation
 
 struct FavouritesModelView: BaseModelView {
-    let screenTitle: String = "Favoritos"
+    let screenTitle: String = "Favoritos ❤️"
     var likedVillagers: [String] = []
     var likedFishes: [String] = []
     var likedBugs: [String] = []
