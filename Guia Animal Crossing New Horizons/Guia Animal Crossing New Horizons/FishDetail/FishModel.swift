@@ -24,6 +24,7 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
     let location: String
     let time: String
     let shadowSize: String
+    let rarity: String
     let abailabilityNorth: String
     let abailabilitySouth: String
     let sellingPriceNook: Int
@@ -53,6 +54,7 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
         location: String,
         time: String,
         shadowSize: String,
+        rarity: String,
         abailabilityNorth: String,
         abailabilitySouth: String,
         sellingPriceNook: Int,
@@ -66,6 +68,7 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
         self.location = location
         self.time = time
         self.shadowSize = shadowSize
+        self.rarity = rarity
         self.abailabilityNorth = abailabilityNorth
         self.abailabilitySouth = abailabilitySouth
         self.sellingPriceNook = sellingPriceNook
@@ -90,6 +93,7 @@ extension FishModel {
         location: "Pier",
         time: "All day",
         shadowSize: "Huge",
+        rarity: "Common",
         abailabilityNorth: "Nov - Apr",
         abailabilitySouth: "May - Nov",
         sellingPriceNook: 7000,
@@ -102,6 +106,7 @@ extension FishModel {
         location: "River (mouth)",
         time: "All day",
         shadowSize: "Large",
+        rarity: "Common",
         abailabilityNorth: "Sep",
         abailabilitySouth: "Mar",
         sellingPriceNook: 700,
@@ -114,6 +119,7 @@ extension FishModel {
         location: "River",
         time: "All day",
         shadowSize: "Medium",
+        rarity: "Common",
         abailabilityNorth: "Jun - Oct",
         abailabilitySouth: "Dec - Apr",
         sellingPriceNook: 800,
@@ -126,6 +132,7 @@ extension FishModel {
         location: "Pond",
         time: "4 PM - 9 AM",
         shadowSize: "Large",
+        rarity: "Common",
         abailabilityNorth: "All year",
         abailabilitySouth: "All year",
         sellingPriceNook: 4000,
@@ -138,6 +145,7 @@ extension FishModel {
         location: "Sea",
         time: "All day",
         shadowSize: "Small",
+        rarity: "Common",
         abailabilityNorth: "All year",
         abailabilitySouth: "All year",
         sellingPriceNook: 150,
@@ -150,6 +158,7 @@ extension FishModel {
         location: "River (clifftop)",
         time: "4 PM - 9 AM",
         shadowSize: "Medium",
+        rarity: "Common",
         abailabilityNorth: "Mar - May; Sep - Nov",
         abailabilitySouth: "Mar - May; Sep - Nov",
         sellingPriceNook: 15000,
@@ -162,6 +171,7 @@ extension FishModel {
         location: "Pond",
         time: "All day",
         shadowSize: "Small",
+        rarity: "Common",
         abailabilityNorth: "Apr - Sep",
         abailabilitySouth: "Oct - Mar",
         sellingPriceNook: 200,
@@ -174,6 +184,7 @@ extension FishModel {
         location: "Sea",
         time: "4 PM – 9 AM",
         shadowSize: "Very large (finned)",
+        rarity: "Common",
         abailabilityNorth: "Jun – Sep",
         abailabilitySouth: "Dec – Mar",
         sellingPriceNook: 15000,

@@ -15,7 +15,7 @@ struct RadioButtonModelView: BaseModelView, ACRadioButtonModel, Identifiable {
     
     init(
         label: String,
-        isSelected: Bool
+        isSelected: Bool = false
     ) {
         self.label = label
         self.isSelected = isSelected
@@ -31,17 +31,14 @@ extension RadioButtonModelView: Hashable {
 
 extension RadioButtonModelView {
     static let option1 = RadioButtonModelView(
-        label: "Opción 1",
-        isSelected: false
+        label: "Común"
     )
     
     static let option2 = RadioButtonModelView(
-        label: "Opción 2",
-        isSelected: true
+        label: "Poco común"
     )
     
     static let option3 = RadioButtonModelView(
-        label: "Opción 3",
-        isSelected: false
+        label: "Raro"
     )
 }
