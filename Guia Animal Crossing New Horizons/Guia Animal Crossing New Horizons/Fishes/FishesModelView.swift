@@ -13,5 +13,8 @@ struct FishesModelView: BaseModelView, ACCollectionTemplateModel {
     var collectionItems: [FishModel] = []
     var errorDescription: String = "Algo ha fallado"
     
+    var allFishes: [FishModel] = []
+    var filteredFishes: [FishModel] = []
+    
     init(){}
 }

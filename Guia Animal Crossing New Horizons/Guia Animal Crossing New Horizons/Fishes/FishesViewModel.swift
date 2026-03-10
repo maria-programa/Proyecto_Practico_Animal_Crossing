@@ -26,10 +26,11 @@ class FishesViewModel: BaseViewModel {
         if modelView.collectionItems.isEmpty {
             await loadFishes()
         }
+        filterFishes()
     }
     
     func handleLikedItem(_ model: FishModel) {
-        guard let modelIndex = modelView.collectionItems.firstIndex(of: model)
+        guard let modelIndex = modelView.filteredFishes.firstIndex(of: model)
         else {
             return
         }
@@ -41,7 +42,7 @@ class FishesViewModel: BaseViewModel {
             userDefaultManager.saveItems(model.name, .likedFishes)
             favouritesStore.addFish(model)
         }
-        modelView.collectionItems[modelIndex].isLiked.toggle()
+        modelView.filteredFishes[modelIndex].isLiked.toggle()
     }
     
     private func loadFishes() async {
@@ -61,6 +62,7 @@ class FishesViewModel: BaseViewModel {
                     location: model.location,
                     time: model.north.availability_array.first?.time ?? "",
                     shadowSize: model.shadow_size,
+                    rarity: model.rarity,
                     abailabilityNorth: model.north.availability_array.first?.months ?? "",
                     abailabilitySouth: model.south.availability_array.first?.months ?? "",
                     sellingPriceNook: model.sell_nook,
@@ -83,6 +85,30 @@ class FishesViewModel: BaseViewModel {
         } catch {
             modelView.errorDescription = error.localizedDescription
             state = .failure
+        }
+    }
+    
+    func filterFishes(){
+        let commonFishes = modelView.collectionItems.filter {
+            $0.rarity == "Common"
+        }
+        
+        let uncommonFishes = modelView.collectionItems.filter {
+            $0.rarity == "Uncommon"
+        }
+        
+        let rareFishes = modelView.collectionItems.filter {
+            $0.rarity == "Rare"
+        }
+        
+        if userDefaultManager.get(forKey: .selectedRadioButton, type: String.self) == "Común" {
+            modelView.filteredFishes = commonFishes
+        } else if userDefaultManager.get(forKey: .selectedRadioButton, type: String.self) == "Poco común" {
+            modelView.filteredFishes = uncommonFishes
+        } else if userDefaultManager.get(forKey: .selectedRadioButton, type: String.self) == "Raro" {
+            modelView.filteredFishes = rareFishes
+        } else {
+            modelView.filteredFishes = modelView.collectionItems
         }
     }
 }

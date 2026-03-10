@@ -73,7 +73,7 @@ struct FishesView: BaseView {
         LazyVGrid (
             columns: columns
         ) {
-            ForEach(viewModel.modelView.collectionItems, id: \.id) { collectionItem in
+            ForEach(viewModel.modelView.filteredFishes, id: \.id) { collectionItem in
                 NavigationLink(value: collectionItem) {
                     ACCard(
                         model: collectionItem) { _ in
