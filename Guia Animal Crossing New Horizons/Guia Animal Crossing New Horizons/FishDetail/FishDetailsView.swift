@@ -14,6 +14,11 @@ struct FishDetailsView: BaseView {
     
     var body: some View {
         ACDetailsTemplate(model: viewModel.modelView)
+        rarityView
+    }
+    
+    var rarityView: some View {
+        Text(viewModel.modelView.rarity)
     }
 }
 

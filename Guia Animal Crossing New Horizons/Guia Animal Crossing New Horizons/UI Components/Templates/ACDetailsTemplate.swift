@@ -43,6 +43,7 @@ struct ACDetailsTemplate: View {
     var detailsLayout: some View {
         List{
             imageView
+                .frame(maxWidth: .infinity, alignment: .center)
             catchPhraseView
             Section (
                 header: Text("Información de \(model.action)")
@@ -79,10 +80,12 @@ struct ACDetailsTemplate: View {
             image
                 .resizable()
                 .scaledToFit()
+                .frame(height: 160)
         } placeholder: {
             model.defaultImage
                 .resizable()
                 .scaledToFit()
+                .frame(height: 80)
         }
     }
     
