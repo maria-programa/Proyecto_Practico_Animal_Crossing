@@ -56,7 +56,7 @@ class FishesViewModel: BaseViewModel {
             )
             
             let fishes = decodedData.compactMap { model in
-                let fish = FishModel (
+                var fish = FishModel (
                     specie: model.name,
                     catchPhrase: model.catchphrases.first ?? "",
                     location: model.location,
@@ -74,6 +74,14 @@ class FishesViewModel: BaseViewModel {
                 
                 if fish.isLiked {
                     favouritesStore.addFish(fish)
+                }
+                
+                if fish.rarity == "Common" {
+                    fish.backgroundColor = .cyan
+                } else if fish.rarity == "Uncommon" {
+                    fish.backgroundColor = .blue
+                } else if fish.rarity == "Rare" {
+                    fish.backgroundColor = .indigo
                 }
                 
                 return fish

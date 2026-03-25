@@ -14,7 +14,7 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
     let specie: String
     let fishIcon: Image = Image(systemName:"fish")
     let foregroundColor: Color = .white
-    let backgroundColor: Color = .cyan
+    var backgroundColor: Color
     var isLiked: Bool
     
     let action: String = "pesca"
@@ -61,7 +61,8 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
         sellingPriceCJ: Int,
         imageURL: URL? = nil, // TODO: quitar valor por defecto
         renderImageURL: URL? = nil, //TODO: quitar el valor por defecto
-        isLiked: Bool
+        isLiked: Bool,
+        backgroundColor: Color = .cyan
     ) {
         self.specie = specie
         self.catchPhrase = catchPhrase
@@ -76,6 +77,7 @@ struct FishModel: Identifiable, ACCardModel, ACDetailsModel, BaseModelView {
         self.imageURL = imageURL
         self.renderImageURL = renderImageURL
         self.isLiked = isLiked
+        self.backgroundColor = backgroundColor
     }
 }
 
