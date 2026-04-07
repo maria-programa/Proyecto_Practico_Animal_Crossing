@@ -13,5 +13,7 @@ struct VillagersModelView: BaseModelView, ACCollectionTemplateModel {
     var collectionItems: [VillagerModel] = []
     var errorDescription: String = "Algo ha fallado"
     
+    var filteredVillagers: [VillagerModel] = []
+    
     init(){}
 }

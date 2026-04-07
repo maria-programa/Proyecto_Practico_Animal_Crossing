@@ -29,6 +29,9 @@ struct SettingsView: BaseView {
                 Spacer()
                     .frame(height: 24)
                 favourites
+                Spacer()
+                    .frame(height: 24)
+                villagerRadioButtons
             }
         }
         .onChange(
@@ -51,6 +54,20 @@ struct SettingsView: BaseView {
             ForEach(viewModel.modelView.radioButtonCollection, id: \.self) {
                 radioButton in ACRadioButton(model: radioButton) { _ in
                     viewModel.handleSelectedRadioButton(radioButton)
+                }
+            }
+        }
+        .padding(.horizontal)
+    }
+    
+    var villagerRadioButtons: some View {
+        VStack(
+            alignment: .leading
+        ) {
+            Text("Vecinos nacidos de: ")
+            ForEach(viewModel.modelView.radioButtonVillagers, id: \.self) {
+                radioButton2 in ACRadioButton(model: radioButton2) { _ in
+                    viewModel.handleSelectedVillagerRadioButton(radioButton2)
                 }
             }
         }

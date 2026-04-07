@@ -38,4 +38,5 @@ enum UserDefaultKeys: String {
     case likedBugs
     case likedFossils
     case selectedRadioButton
+    case selectedVillagerRadioButton
 }

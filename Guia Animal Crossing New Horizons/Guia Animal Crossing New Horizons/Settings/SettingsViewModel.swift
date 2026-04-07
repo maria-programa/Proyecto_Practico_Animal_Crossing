@@ -21,13 +21,8 @@ class SettingsViewModel: BaseViewModel {
         self.state = state
         
         loadSavedRadioSelection()
+        loadSavedBirthdayRadioSelection()
     }
-    
-    //    func onAppear() {
-    //       userDefaultManager.set(value: modelView.isDark, forKey: .theme)
-    //        let userTheme = userDefaultManager.get(forKey: .theme, type: Bool.self)
-    //        userDefaultManager.set(value: userTheme, forKey: .theme)
-    //    }
     
     func getTheme() -> Bool? {
         let userTheme = userDefaultManager.get(forKey: .theme, type: Bool.self)
@@ -49,27 +44,45 @@ class SettingsViewModel: BaseViewModel {
                 modelView.radioButtonCollection[$0].isSelected = false
             }
             modelView.radioButtonCollection[index].isSelected = true
-            saveRadioButton(model.label)
+            saveRadioButton(model.label, .selectedRadioButton)
         } else {
             modelView.radioButtonCollection[index].isSelected = false
-            deleteRadioButton()
+            deleteRadioButton(.selectedRadioButton)
         }
     }
     
-    private func getRadioButton() -> String {
-        guard let savedRadioButton = userDefaultManager.get(forKey: .selectedRadioButton, type: String.self)
+    func handleSelectedVillagerRadioButton(_ model: RadioButtonModelView) {
+        guard let index = modelView.radioButtonVillagers.firstIndex(of: model)
+        else {
+            return
+        }
+        
+        if model.isSelected == false {
+            modelView.radioButtonVillagers.indices.forEach {
+                modelView.radioButtonVillagers[$0].isSelected = false
+            }
+            modelView.radioButtonVillagers[index].isSelected = true
+            saveRadioButton(model.label, .selectedVillagerRadioButton)
+        } else {
+            modelView.radioButtonVillagers[index].isSelected = false
+            deleteRadioButton(.selectedVillagerRadioButton)
+        }
+    }
+    
+    private func getRadioButton(_ forKey: UserDefaultKeys) -> String {
+        guard let savedRadioButton = userDefaultManager.get(forKey: forKey, type: String.self)
         else {
             return ""
         }
         return savedRadioButton
     }
     
-    private func setRadioButton(_ label: String) {
-        userDefaultManager.set(value: label, forKey: .selectedRadioButton)
+    private func setRadioButton(_ label: String, _ forKey: UserDefaultKeys) {
+        userDefaultManager.set(value: label, forKey: forKey)
     }
     
     private func loadSavedRadioSelection() {
-        let saved = getRadioButton()
+        let saved = getRadioButton(.selectedRadioButton)
         guard !saved.isEmpty else { return }
 
         modelView.radioButtonCollection.indices.forEach { index in
@@ -78,20 +91,30 @@ class SettingsViewModel: BaseViewModel {
         }
     }
     
-    private func saveRadioButton(_ label: String) {
-        let saved = getRadioButton()
-            
-        if saved.isEmpty || saved != label {
-            setRadioButton(label)
+    private func loadSavedBirthdayRadioSelection() {
+        let saved = getRadioButton(.selectedVillagerRadioButton)
+        guard !saved.isEmpty else { return }
+        
+        modelView.radioButtonVillagers.indices.forEach { index in
+            modelView.radioButtonVillagers[index].isSelected =
+                (modelView.radioButtonVillagers[index].label == saved)
         }
     }
     
-    private func deleteRadioButton() {
-        let savedRadioButton = getRadioButton()
+    private func saveRadioButton(_ label: String, _ forKey: UserDefaultKeys) {
+        let saved = getRadioButton(forKey)
+            
+        if saved.isEmpty || saved != label {
+            setRadioButton(label, forKey)
+        }
+    }
+    
+    private func deleteRadioButton(_ forKey: UserDefaultKeys) {
+        let savedRadioButton = getRadioButton(forKey)
         guard !savedRadioButton.isEmpty
         else {
             return
         }
-        setRadioButton("")
+        setRadioButton("", forKey)
     }
 }

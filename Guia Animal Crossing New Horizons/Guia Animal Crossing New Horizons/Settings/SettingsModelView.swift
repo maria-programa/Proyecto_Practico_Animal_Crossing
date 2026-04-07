@@ -9,4 +9,5 @@ import Foundation
 
 struct SettingsModelView: BaseModelView {
     var radioButtonCollection: [RadioButtonModelView] = [.option1, .option2, .option3]
+    var radioButtonVillagers: [RadioButtonModelView] = [.firstOption, .secondOption]
 }

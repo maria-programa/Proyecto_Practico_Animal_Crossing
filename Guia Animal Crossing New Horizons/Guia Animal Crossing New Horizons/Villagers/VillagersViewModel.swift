@@ -28,10 +28,11 @@ class VillagersViewModel: BaseViewModel {
         if modelView.collectionItems.isEmpty {
             await loadVillagers()
         }
+        filterVillagers()
     }
     
     func handleLikedItem(_ model: VillagerModel) {
-        guard let modelIndex = modelView.collectionItems.firstIndex(of: model)
+        guard let modelIndex = modelView.filteredVillagers.firstIndex(of: model)
         else {
             return
         }
@@ -44,7 +45,7 @@ class VillagersViewModel: BaseViewModel {
             favouritesStore.addVillager(model)
 
         }
-        modelView.collectionItems[modelIndex].isLiked.toggle()
+        modelView.filteredVillagers[modelIndex].isLiked.toggle()
     }
     
     private func loadVillagers() async {
@@ -87,6 +88,24 @@ class VillagersViewModel: BaseViewModel {
         } catch {
             modelView.errorDescription = error.localizedDescription
             state = .failure
+        }
+    }
+    
+    func filterVillagers() {
+        let januaryToJune = modelView.collectionItems.filter {
+            $0.birthdayMonth == "January" || $0.birthdayMonth == "February" || $0.birthdayMonth == "March" || $0.birthdayMonth == "April" || $0.birthdayMonth == "May" || $0.birthdayMonth == "June"
+        }
+        
+        let julyToDecember = modelView.collectionItems.filter {
+            $0.birthdayMonth == "July" || $0.birthdayMonth == "August" || $0.birthdayMonth == "September" || $0.birthdayMonth == "October" || $0.birthdayMonth == "November" || $0.birthdayMonth == "December" 
+        }
+        
+        if userDefaultManager.get(forKey: .selectedVillagerRadioButton, type: String.self) == "Enero - Junio" {
+            modelView.filteredVillagers = januaryToJune
+        } else if userDefaultManager.get(forKey: .selectedVillagerRadioButton, type: String.self) == "Julio - Diciembre" {
+            modelView.filteredVillagers = julyToDecember
+        } else {
+            modelView.filteredVillagers = modelView.collectionItems
         }
     }
 }

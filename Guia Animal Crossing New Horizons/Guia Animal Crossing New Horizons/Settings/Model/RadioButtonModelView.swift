@@ -42,3 +42,13 @@ extension RadioButtonModelView {
         label: "Raro"
     )
 }
+
+extension RadioButtonModelView {
+    static let firstOption = RadioButtonModelView(
+        label: "Enero - Junio"
+    )
+    
+    static let secondOption = RadioButtonModelView(
+        label: "Julio - Diciembre"
+    )
+}
